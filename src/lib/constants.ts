@@ -9,9 +9,8 @@ export const siteConfig = {
     general: "luke@stock-bud.com",
   },
   social: {
-    instagram: "https://instagram.com/stockbudapp",
-    twitter: "https://x.com/stockbudapp",
-    tiktok: "https://tiktok.com/@stockbudapp",
+    instagram: "https://www.instagram.com/StockBudApp/",
+    tiktok: "https://www.tiktok.com/@stockbud",
   },
   appStore: {
     ios: "#",
@@ -47,18 +46,11 @@ export const features = [
     icon: "trophy" as const,
   },
   {
-    id: "ai-news",
-    title: "AI-Powered Insights",
+    id: "prizes",
+    title: "Win Cash Prizes",
     description:
-      "Get smart news summaries and alerts tailored to your portfolio and interests. Stay informed without the noise.",
+      "Enter competitions, pick your stocks, and compete for real cash prizes. Put your investing knowledge to the test.",
     icon: "sparkles" as const,
-  },
-  {
-    id: "sparks",
-    title: "Earn Sparks",
-    description:
-      "Share knowledge, help others learn, and get rewarded with Sparks for your contributions to the community.",
-    icon: "zap" as const,
   },
 ];
 
@@ -72,13 +64,13 @@ export const steps = [
     number: 2,
     title: "Track & Learn",
     description:
-      "Add your investments, follow stocks, and explore AI-powered insights.",
+      "Add your investments, follow stocks, and track your portfolio.",
   },
   {
     number: 3,
     title: "Compete & Grow",
     description:
-      "Join leagues, climb leaderboards, and earn Sparks for sharing knowledge.",
+      "Join leagues, climb leaderboards, and grow your investing skills.",
   },
 ];
 
@@ -97,11 +89,11 @@ export const footerLinks = {
   ],
   company: [
     { label: "About", href: "#" },
-    { label: "Careers", href: "#" },
+    { label: "Careers", href: "mailto:luke@stock-bud.com" },
     { label: "Contact", href: `mailto:${siteConfig.email.support}` },
   ],
   legal: [
-    { label: "Privacy Policy", href: "#" },
+    { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "#" },
     { label: "Cookie Policy", href: "#" },
   ],

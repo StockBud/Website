@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { AppStoreButtons } from "@/components/ui/AppStoreButtons";
 import { GradientOverlay } from "@/components/ui/GradientOverlay";
@@ -42,7 +43,7 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Phone mockup placeholder */}
+        {/* Phone mockup */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,30 +56,17 @@ export function HeroSection() {
               className="absolute inset-0 -z-10 scale-125 blur-3xl"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(0,232,108,0.2) 0%, transparent 70%)",
+                  "radial-gradient(circle, rgba(76,175,80,0.2) 0%, transparent 70%)",
               }}
             />
-            {/* Phone mockup placeholder */}
-            <div className="flex h-[500px] w-[260px] items-center justify-center rounded-[3rem] border-2 border-border bg-background-card shadow-2xl md:h-[580px] md:w-[290px]">
-              <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-8 w-8 text-accent"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
-                </div>
-                <p className="text-sm font-medium text-foreground-muted">
-                  App Preview
-                </p>
-                <p className="mt-1 text-xs text-foreground-subtle">
-                  Coming Soon
-                </p>
-              </div>
+            <div className="relative h-[500px] w-[260px] overflow-hidden rounded-[3rem] border-2 border-accent shadow-2xl md:h-[580px] md:w-[290px]">
+              <Image
+                src="/screenshots/stock-graph.png"
+                alt="StockBud stock details view showing real-time charts and market data"
+                fill
+                className="object-cover object-top"
+                priority
+              />
             </div>
           </div>
         </motion.div>

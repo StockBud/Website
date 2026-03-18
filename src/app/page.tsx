@@ -2,7 +2,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
-import { SocialProofSection } from "@/components/sections/SocialProofSection";
 import { DownloadCTASection } from "@/components/sections/DownloadCTASection";
 import { Footer } from "@/components/layout/Footer";
 
@@ -14,7 +13,6 @@ export default function Home() {
         <HeroSection />
         <FeaturesSection />
         <HowItWorksSection />
-        <SocialProofSection />
         <DownloadCTASection />
       </main>
       <Footer />
