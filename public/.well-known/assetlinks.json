@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.stockbud.app",
+      "sha256_cert_fingerprints": ["73:3B:B6:B3:7F:16:27:2B:6F:78:01:65:4F:A9:C5:F8:13:83:A0:D7:D4:6F:41:1C:68:5E:E4:78:06:D0:39:25"]
+    }
+  }
+]
