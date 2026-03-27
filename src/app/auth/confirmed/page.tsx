@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Opening StockBud...",
-};
-
 export default function AuthConfirmedPage() {
+  useEffect(() => {
+    const params = window.location.search; // e.g. ?code=abc&...
+    window.location.href = `stockbud://auth/confirmed${params}`;
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-6">
       <div className="w-full max-w-md text-center">
