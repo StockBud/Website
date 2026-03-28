@@ -37,9 +37,10 @@ async function fetchProfile(username: string): Promise<Profile | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }): Promise<Metadata> {
-  const profile = await fetchProfile(params.username);
+  const { username } = await params;
+  const profile = await fetchProfile(username);
   if (!profile) return { title: "Profile not found — StockBud" };
   const name = profile.display_name || profile.username;
   return {
@@ -58,8 +59,9 @@ export async function generateMetadata({
 export default async function ProfilePage({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }) {
-  const profile = await fetchProfile(params.username);
-  return <ProfileClient username={params.username} profile={profile} />;
+  const { username } = await params;
+  const profile = await fetchProfile(username);
+  return <ProfileClient username={username} profile={profile} />;
 }
