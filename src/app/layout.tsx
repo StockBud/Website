@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -71,6 +72,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-GB" className={inter.variable}>
+      <head>
+        <Script
+          src="https://www.ameportal.com/tracker.js"
+          data-website-id="m57671thnptbnhyz0yjazjf68x843k74"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className="bg-background text-foreground antialiased">
         <a
           href="#main-content"
