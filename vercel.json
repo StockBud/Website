@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/.well-known/apple-app-site-association",
+      "destination": "https://poddvsjotivfzwjwfqqn.supabase.co/functions/v1/deep-link-redirect/.well-known/apple-app-site-association"
+    },
+    {
+      "source": "/.well-known/assetlinks.json",
+      "destination": "https://poddvsjotivfzwjwfqqn.supabase.co/functions/v1/deep-link-redirect/.well-known/assetlinks.json"
+    },
+    {
+      "source": "/league/:path*",
+      "destination": "https://poddvsjotivfzwjwfqqn.supabase.co/functions/v1/deep-link-redirect/league/:path*"
+    },
+    {
+      "source": "/post/:path*",
+      "destination": "https://poddvsjotivfzwjwfqqn.supabase.co/functions/v1/deep-link-redirect/post/:path*"
+    },
+    {
+      "source": "/profile/:path*",
+      "destination": "https://poddvsjotivfzwjwfqqn.supabase.co/functions/v1/deep-link-redirect/profile/:path*"
+    }
+  ]
+}
