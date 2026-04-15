@@ -18,7 +18,7 @@ export default function PrivacyPolicy() {
 
       <main className="mx-auto max-w-3xl px-6 pt-32 pb-20 md:px-8">
         <h1 className="text-3xl font-bold md:text-4xl">Privacy Policy</h1>
-        <p className="mt-2 text-foreground-muted">Last updated: 18 March 2026</p>
+        <p className="mt-2 text-foreground-muted">Last updated: 15 April 2026</p>
 
         <div className="mt-10 space-y-8 text-foreground-muted leading-relaxed [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:text-foreground [&_h3]:mb-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-1">
           <section>
@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
             <ul>
               <li>Stocks and securities you follow or add to your portfolio</li>
               <li>Trading activity and competition entries</li>
-              <li>Portfolio connection data when you link third-party brokerage accounts (e.g. Trading 212) &mdash; we receive read-only portfolio data and do not store your brokerage credentials</li>
+              <li>Portfolio connection data when you link third-party brokerage accounts (see Section 5 below)</li>
             </ul>
 
             <h3 className="mt-4">2.3 Social &amp; Community Data</h3>
@@ -96,21 +96,71 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2>5. Data Storage &amp; Security</h2>
+            <h2>5. Third-Party Brokerage Account Linking (e.g. Trading 212)</h2>
+
+            <h3>5.1 What This Feature Does</h3>
+            <p>
+              StockBud allows you to link a third-party brokerage account (currently Trading 212) so that your portfolio holdings and values can be displayed within the app. This connection is entirely optional and initiated only by you.
+            </p>
+
+            <h3 className="mt-4">5.2 Data We Receive</h3>
+            <p>When you link your brokerage account, we receive <strong>read-only</strong> data via the brokerage&apos;s official API, which may include:</p>
+            <ul>
+              <li>Portfolio holdings and positions (instrument names, quantities, current values)</li>
+              <li>Historical transaction data (buys, sells, dividends)</li>
+              <li>Account value and cash balance</li>
+            </ul>
+
+            <h3 className="mt-4">5.3 Data We Do NOT Receive or Store</h3>
+            <ul>
+              <li>Your brokerage login credentials (username and password) &mdash; authentication is handled entirely by the brokerage&apos;s own secure login flow</li>
+              <li>Your bank account or payment card details</li>
+              <li>The ability to place, modify, or cancel trades or withdraw funds on your behalf</li>
+            </ul>
+
+            <h3 className="mt-4">5.4 How We Use Brokerage Data</h3>
+            <p>Brokerage data is used solely to:</p>
+            <ul>
+              <li>Display your portfolio within the StockBud app</li>
+              <li>Calculate portfolio performance and analytics</li>
+              <li>Enable participation in competitions where linked portfolio data may be used</li>
+            </ul>
+            <p className="mt-2">
+              We do not sell, licence, or share your brokerage data with any third party for marketing, advertising, or any purpose unrelated to providing the Service.
+            </p>
+
+            <h3 className="mt-4">5.5 Disconnecting Your Brokerage Account</h3>
+            <p>
+              You may disconnect your linked brokerage account at any time through the app settings. Upon disconnection, we will delete the cached brokerage data from our systems within 30 days. Disconnecting does not affect your StockBud account or any other data you have provided to us.
+            </p>
+
+            <h3 className="mt-4">5.6 Third-Party Terms</h3>
+            <p>
+              Your brokerage account is governed by the brokerage provider&apos;s own terms of service and privacy policy. By linking your account, you acknowledge that you have reviewed and accepted those terms. StockBud is not responsible for the brokerage&apos;s handling of your data, the accuracy or completeness of data provided to us via their API, or the availability of their services.
+            </p>
+
+            <h3 className="mt-4">5.7 Data Accuracy Disclaimer</h3>
+            <p>
+              Portfolio data displayed within StockBud is sourced from your brokerage provider and may be subject to delays, inaccuracies, or interruptions beyond our control. StockBud does not guarantee the accuracy, timeliness, or completeness of any brokerage-sourced data. You should always verify your holdings and account status directly with your brokerage provider.
+            </p>
+          </section>
+
+          <section>
+            <h2>6. Data Storage &amp; Security</h2>
             <p>
               Your data is stored on secure servers. We implement industry-standard security measures including encryption in transit (TLS) and at rest, secure password hashing, and access controls. However, no system is 100% secure and we cannot guarantee absolute security.
             </p>
           </section>
 
           <section>
-            <h2>6. Data Retention</h2>
+            <h2>7. Data Retention</h2>
             <p>
               We retain your personal data for as long as your account is active or as needed to provide the Service. If you delete your account, we will delete or anonymise your personal data within 30 days, except where we are required to retain it for legal or regulatory purposes.
             </p>
           </section>
 
           <section>
-            <h2>7. Your Rights</h2>
+            <h2>8. Your Rights</h2>
             <p>Under applicable data protection laws (including UK GDPR), you have the right to:</p>
             <ul>
               <li>Access the personal data we hold about you</li>
@@ -126,28 +176,28 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2>8. Children&apos;s Privacy</h2>
+            <h2>9. Children&apos;s Privacy</h2>
             <p>
               StockBud is not intended for users under the age of 18. We do not knowingly collect personal data from anyone under 18. If we become aware that we have collected data from a user under 18, we will delete it promptly.
             </p>
           </section>
 
           <section>
-            <h2>9. Third-Party Links</h2>
+            <h2>10. Third-Party Links</h2>
             <p>
               The Service may contain links to third-party websites or services (e.g. app stores, brokerage platforms). We are not responsible for the privacy practices of these third parties and encourage you to read their privacy policies.
             </p>
           </section>
 
           <section>
-            <h2>10. Changes to This Policy</h2>
+            <h2>11. Changes to This Policy</h2>
             <p>
               We may update this Privacy Policy from time to time. We will notify you of material changes by posting the updated policy within the app or sending you a notification. Your continued use of the Service after changes constitutes acceptance of the updated policy.
             </p>
           </section>
 
           <section>
-            <h2>11. Contact Us</h2>
+            <h2>12. Contact Us</h2>
             <p>If you have any questions about this Privacy Policy, please contact us:</p>
             <ul>
               <li>Email: <a href="mailto:support@stock-bud.com" className="text-accent hover:underline">support@stock-bud.com</a></li>

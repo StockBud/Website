@@ -18,7 +18,7 @@ export default function TermsOfService() {
 
       <main className="mx-auto max-w-3xl px-6 pt-32 pb-20 md:px-8">
         <h1 className="text-3xl font-bold md:text-4xl">Terms of Service</h1>
-        <p className="mt-2 text-foreground-muted">Last updated: 18 March 2026</p>
+        <p className="mt-2 text-foreground-muted">Last updated: 15 April 2026</p>
 
         <div className="mt-10 space-y-8 text-foreground-muted leading-relaxed [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:text-foreground [&_h3]:mb-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-1">
           <section>
@@ -100,9 +100,23 @@ export default function TermsOfService() {
           </section>
 
           <section>
-            <h2>8. Third-Party Integrations</h2>
+            <h2>8. Third-Party Brokerage Integrations</h2>
             <p>
-              StockBud integrates with third-party services such as Trading 212 for portfolio data. Your use of these integrations is also subject to the respective third party&apos;s terms of service and privacy policy. We are not responsible for the availability, accuracy, or conduct of third-party services.
+              StockBud allows you to link third-party brokerage accounts (e.g. Trading 212) to display your portfolio data within the app. By linking a brokerage account, you acknowledge and agree that:
+            </p>
+            <ul>
+              <li>You are authorising StockBud to access <strong>read-only</strong> portfolio data from your brokerage account via their official API</li>
+              <li>StockBud does not have the ability to place, modify, or cancel trades, or to withdraw or transfer funds from your brokerage account</li>
+              <li>StockBud does not receive or store your brokerage login credentials</li>
+              <li>Portfolio data displayed within StockBud is sourced from your brokerage provider and may be subject to delays, inaccuracies, or interruptions &mdash; StockBud does not guarantee its accuracy, timeliness, or completeness</li>
+              <li>You remain solely responsible for all activity on, and decisions relating to, your brokerage account</li>
+              <li>Your use of the brokerage integration is also subject to the brokerage provider&apos;s own terms of service and privacy policy, which you should review independently</li>
+              <li>StockBud is not affiliated with, endorsed by, or acting as an agent of any brokerage provider</li>
+              <li>StockBud is not responsible for the availability, accuracy, security, or conduct of any third-party brokerage service</li>
+              <li>You may disconnect your brokerage account at any time through the app settings</li>
+            </ul>
+            <p className="mt-2">
+              Any losses, damages, or liabilities arising from your use of a linked brokerage account, including but not limited to investment losses, data discrepancies, or unauthorised access to your brokerage account, are your sole responsibility and not the responsibility of StockBud.
             </p>
           </section>
 
