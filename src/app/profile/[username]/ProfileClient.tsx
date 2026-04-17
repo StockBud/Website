@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { Profile } from "./page";
 
-const APP_STORE_URL = "https://apps.apple.com/app/stockbud/id0000000000"; // TODO: replace with real App Store ID
+const APP_STORE_URL = "https://apps.apple.com/gb/app/stockbud/id6758548800";
 const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.stockbud.app";
 
@@ -60,9 +60,7 @@ export function ProfileClient({
           style={{ background: "#1C261F" }}
         >
           <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-[#2A3C30] border-t-[#17CF54]" />
-          <p className="text-base font-bold text-white">
-            Opening {storeName}…
-          </p>
+          <p className="text-base font-bold text-white">Opening {storeName}…</p>
           <p className="mt-1 text-sm" style={{ color: "#9DB8A6" }}>
             Download StockBud to view this profile.
           </p>
