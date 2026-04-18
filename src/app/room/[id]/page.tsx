@@ -34,9 +34,10 @@ async function fetchRoom(id: string): Promise<Room | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const room = await fetchRoom(params.id);
+  const { id } = await params;
+  const room = await fetchRoom(id);
   if (!room) return { title: "Room not found — StockBud" };
   return {
     title: `Join ${room.name} — StockBud`,
@@ -53,8 +54,9 @@ export async function generateMetadata({
 export default async function RoomPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const room = await fetchRoom(params.id);
-  return <RoomClient id={params.id} room={room} />;
+  const { id } = await params;
+  const room = await fetchRoom(id);
+  return <RoomClient id={id} room={room} />;
 }

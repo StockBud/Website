@@ -18,11 +18,16 @@ export function RoomClient({ id, room }: { id: string; room: Room | null }) {
     setIsIOS(ios);
     if (ios || android) {
       setRedirecting(true);
+      const storeUrl = ios ? APP_STORE_URL : PLAY_STORE_URL;
+      const now = Date.now();
+      window.location.href = `stockbud://room/${id}`;
       setTimeout(() => {
-        window.location.href = ios ? APP_STORE_URL : PLAY_STORE_URL;
-      }, 1200);
+        if (document.visibilityState !== "hidden" && Date.now() - now < 3000) {
+          window.location.href = storeUrl;
+        }
+      }, 1500);
     }
-  }, []);
+  }, [id]);
 
   const storeUrl = isIOS ? APP_STORE_URL : PLAY_STORE_URL;
   const storeName = isIOS ? "App Store" : "Google Play";
