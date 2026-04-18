@@ -44,9 +44,10 @@ async function fetchPost(id: string): Promise<Post | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const post = await fetchPost(params.id);
+  const { id } = await params;
+  const post = await fetchPost(id);
   if (!post) return { title: "Post not found — StockBud" };
   const name = post.author?.display_name || post.author?.username || "StockBud";
   const description = post.body ? post.body.slice(0, 200) : `View this post on StockBud.`;
@@ -66,8 +67,9 @@ export async function generateMetadata({
 export default async function PostPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const post = await fetchPost(params.id);
-  return <PostClient id={params.id} post={post} />;
+  const { id } = await params;
+  const post = await fetchPost(id);
+  return <PostClient id={id} post={post} />;
 }

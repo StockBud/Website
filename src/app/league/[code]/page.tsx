@@ -35,9 +35,10 @@ async function fetchLeague(code: string): Promise<League | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 }): Promise<Metadata> {
-  const league = await fetchLeague(params.code);
+  const { code } = await params;
+  const league = await fetchLeague(code);
   if (!league) return { title: "League not found — StockBud" };
   return {
     title: `Join ${league.name} — StockBud`,
@@ -54,8 +55,9 @@ export async function generateMetadata({
 export default async function LeaguePage({
   params,
 }: {
-  params: { code: string };
+  params: Promise<{ code: string }>;
 }) {
-  const league = await fetchLeague(params.code);
-  return <LeagueClient code={params.code} league={league} />;
+  const { code } = await params;
+  const league = await fetchLeague(code);
+  return <LeagueClient code={code} league={league} />;
 }
