@@ -13,7 +13,7 @@ export const siteConfig = {
     tiktok: "https://www.tiktok.com/@stockbud",
   },
   appStore: {
-    ios: "#",
+    ios: "https://apps.apple.com/gb/app/stockbud/id6758548800",
     android: "https://play.google.com/store/apps/details?id=com.stockbud.app",
   },
 };

@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "F993CX5672.com.vlad.stockbud",
-        "paths": ["/profile/*", "/auth/confirmed"]
+        "paths": ["/profile/*", "/post/*", "/league/*", "/room/*", "/auth/confirmed"]
       }
     ]
   }
