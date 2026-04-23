@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockBud — Quick Survey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark: #003021;
+      --green-light: #6faf6a;
+      --gold: #d8a840;
+      --white: #ffffff;
+      --off-white: #f5f5f0;
+      --text-muted: rgba(255,255,255,0.55);
+    }
+
+    html, body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: var(--green-dark);
+      color: var(--white);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 60px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      text-decoration: none;
+    }
+
+    .logo svg { width: 36px; height: 36px; }
+
+    .logo-wordmark {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.3px;
+    }
+
+    /* Card */
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .card-header {
+      margin-bottom: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(216,168,64,0.12);
+      border: 1px solid rgba(216,168,64,0.25);
+      border-radius: 100px;
+      padding: 4px 12px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Progress */
+    .progress-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 100px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 100px;
+      transition: width 0.4s ease;
+    }
+
+    /* Questions */
+    .question { display: none; }
+    .question.active { display: block; animation: fadeUp 0.3s ease; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .question-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    /* Options */
+    .options { display: flex; flex-direction: column; gap: 10px; }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: left;
+      width: 100%;
+    }
+
+    .option:hover {
+      border-color: rgba(111,175,106,0.4);
+      background: rgba(111,175,106,0.06);
+    }
+
+    .option.selected {
+      border-color: var(--green-light);
+      background: rgba(111,175,106,0.12);
+      color: var(--white);
+    }
+
+    .option-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option.selected .option-dot {
+      border-color: var(--green-light);
+      background: var(--green-light);
+    }
+
+    .option.selected .option-dot::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-dark);
+    }
+
+    /* Text input */
+    .text-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s ease;
+      resize: none;
+    }
+
+    .text-input:focus { border-color: rgba(111,175,106,0.5); }
+    .text-input::placeholder { color: rgba(255,255,255,0.3); }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+    }
+
+    .btn-back {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 8px 0;
+      transition: color 0.15s ease;
+    }
+
+    .btn-back:hover { color: var(--white); }
+    .btn-back.hidden { visibility: hidden; }
+
+    .btn-next {
+      background: var(--gold);
+      color: var(--green-dark);
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-next:hover { background: #e6b845; transform: translateY(-1px); }
+    .btn-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    .step-count {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Success */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(111,175,106,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .success-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Error toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #c0392b;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: transform 0.3s ease;
+      z-index: 100;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 480px) {
+      .card { padding: 28px 20px; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo -->
+  <a href="/" class="logo">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="18" fill="#6faf6a"/>
+      <polyline points="7,24 13,17 18,20 29,10" stroke="#003021" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polyline points="25,10 29,10 29,14" stroke="#003021" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <span class="logo-wordmark">StockBud</span>
+  </a>
+
+  <!-- Card -->
+  <div class="card">
+
+    <!-- Header -->
+    <div class="card-header">
+      <div class="badge">2 min survey</div>
+      <h1>Help us build what you actually want</h1>
+      <p class="subtitle">We're building StockBud for people like you. Tell us where you're at and we'll make sure the product fits.</p>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+
+    <!-- Q1: Investing status -->
+    <div class="question active" data-q="1">
+      <div class="question-label">Question 1 of 6</div>
+      <div class="question-text">Do you currently invest?</div>
+      <div class="options">
+        <button class="option" data-value="yes_active">Yes, actively</button>
+        <button class="option" data-value="yes_occasionally">Yes, occasionally</button>
+        <button class="option" data-value="no_want_to">No, but I want to</button>
+        <button class="option" data-value="no_not_interested">No, not interested yet</button>
+      </div>
+    </div>
+
+    <!-- Q2: Platform -->
+    <div class="question" data-q="2">
+      <div class="question-label">Question 2 of 6</div>
+      <div class="question-text">Which platform do you use? (or would use)</div>
+      <div class="options">
+        <button class="option" data-value="trading212">Trading 212</button>
+        <button class="option" data-value="freetrade">Freetrade</button>
+        <button class="option" data-value="hargreaves">Hargreaves Lansdown</button>
+        <button class="option" data-value="other">Other</button>
+        <button class="option" data-value="none">None yet</button>
+      </div>
+    </div>
+
+    <!-- Q3: Barrier -->
+    <div class="question" data-q="3">
+      <div class="question-label">Question 3 of 6</div>
+      <div class="question-text">What's the biggest thing stopping you from investing more?</div>
+      <div class="options">
+        <button class="option" data-value="seems_risky">Seems too risky</button>
+        <button class="option" data-value="dont_know_where">Don't know where to start</button>
+        <button class="option" data-value="no_money">Don't have spare cash</button>
+        <button class="option" data-value="no_time">No time to research</button>
+        <button class="option" data-value="nothing">Nothing — I'm already investing regularly</button>
+      </div>
+    </div>
+
+    <!-- Q4: Social feature appeal -->
+    <div class="question" data-q="4">
+      <div class="question-label">Question 4 of 6</div>
+      <div class="question-text">How appealing is the idea of competing in portfolio leagues with friends?</div>
+      <div class="options">
+        <button class="option" data-value="very_appealing">Very appealing — I'd use it straight away</button>
+        <button class="option" data-value="somewhat_appealing">Somewhat appealing</button>
+        <button class="option" data-value="not_sure">Not sure yet</button>
+        <button class="option" data-value="not_appealing">Not appealing</button>
+      </div>
+    </div>
+
+    <!-- Q5: Age -->
+    <div class="question" data-q="5">
+      <div class="question-label">Question 5 of 6</div>
+      <div class="question-text">How old are you?</div>
+      <div class="options">
+        <button class="option" data-value="under_18">Under 18</button>
+        <button class="option" data-value="18_22">18–22</button>
+        <button class="option" data-value="23_27">23–27</button>
+        <button class="option" data-value="28_35">28–35</button>
+        <button class="option" data-value="over_35">Over 35</button>
+      </div>
+    </div>
+
+    <!-- Q6: Email -->
+    <div class="question" data-q="6">
+      <div class="question-label">Question 6 of 6</div>
+      <div class="question-text">Drop your email — we'll keep you in the loop on our launch.</div>
+      <input type="email" class="text-input" id="emailInput" placeholder="your@email.com" autocomplete="email">
+      <p style="font-size:12px; color: var(--text-muted); margin-top: 10px;">Optional. No spam, ever. Unsubscribe anytime.</p>
+    </div>
+
+    <!-- Success -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M5 13l4 4L19 7" stroke="#6faf6a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="success-title">Thanks — that's genuinely helpful.</div>
+      <p class="success-sub">We're building StockBud around responses like yours.<br>We'll be in touch when we're ready for you.</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav" id="navBar">
+      <button class="btn-back hidden" id="btnBack">← Back</button>
+      <span class="step-count" id="stepCount">1 of 6</span>
+      <button class="btn-next" id="btnNext" disabled>Next →</button>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast">Something went wrong. Please try again.</div>
+
+  <script>
+    const SUPABASE_URL = 'https://poddvsjotivfzwjwfqqn.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvZGR2c2pvdGl2Znp3andmcXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNTU5NDYsImV4cCI6MjA4MzYzMTk0Nn0.-PgNNdmj4uWSyg0xPTVojK8e2nbakVmgTbyXQguV0VM';
+
+    const totalSteps = 6;
+    let currentStep = 1;
+    const answers = {};
+
+    const questions = document.querySelectorAll('.question');
+    const btnNext = document.getElementById('btnNext');
+    const btnBack = document.getElementById('btnBack');
+    const progressFill = document.getElementById('progressFill');
+    const stepCount = document.getElementById('stepCount');
+    const navBar = document.getElementById('navBar');
+    const successState = document.getElementById('successState');
+    const emailInput = document.getElementById('emailInput');
+    const toast = document.getElementById('toast');
+
+    function updateProgress() {
+      const pct = ((currentStep - 1) / totalSteps) * 100;
+      progressFill.style.width = pct + '%';
+      stepCount.textContent = currentStep + ' of ' + totalSteps;
+      btnBack.classList.toggle('hidden', currentStep === 1);
+    }
+
+    function showStep(step) {
+      questions.forEach(q => q.classList.remove('active'));
+      const target = document.querySelector('[data-q="' + step + '"]');
+      if (target) target.classList.add('active');
+      updateProgress();
+
+      // Check if current step already answered
+      if (step === 6) {
+        btnNext.textContent = 'Submit →';
+        btnNext.disabled = false; // email is optional
+      } else {
+        btnNext.textContent = 'Next →';
+        const qKey = 'q' + step;
+        btnNext.disabled = !answers[qKey];
+      }
+    }
+
+    // Option selection (questions 1-5)
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const qEl = opt.closest('.question');
+        const qNum = qEl.dataset.q;
+        qEl.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        answers['q' + qNum] = opt.dataset.value;
+        btnNext.disabled = false;
+      });
+    });
+
+    // Email input (optional)
+    emailInput.addEventListener('input', () => {
+      answers.email = emailInput.value.trim() || null;
+    });
+
+    btnNext.addEventListener('click', async () => {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        await submitSurvey();
+      }
+    });
+
+    btnBack.addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    async function submitSurvey() {
+      btnNext.disabled = true;
+      btnNext.textContent = 'Submitting...';
+
+      const payload = {
+        invests: answers.q1 || null,
+        platform: answers.q2 || null,
+        barrier: answers.q3 || null,
+        social_appeal: answers.q4 || null,
+        age_range: answers.q5 || null,
+        email: answers.email || null,
+        source: document.referrer || 'direct',
+        submitted_at: new Date().toISOString()
+      };
+
+      try {
+        const res = await fetch(SUPABASE_URL + '/rest/v1/survey_responses', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          const err = await res.text();
+          console.error('Supabase error:', err);
+          showToast('Something went wrong. Please try again.');
+          btnNext.disabled = false;
+          btnNext.textContent = 'Submit →';
+          return;
+        }
+
+        // Success
+        progressFill.style.width = '100%';
+        questions.forEach(q => q.classList.remove('active'));
+        successState.style.display = 'block';
+        navBar.style.display = 'none';
+
+      } catch (e) {
+        console.error(e);
+        showToast('Connection error. Please try again.');
+        btnNext.disabled = false;
+        btnNext.textContent = 'Submit →';
+      }
+    }
+
+    showStep(1);
+  </script>
+</body>
+</html>
