@@ -7,6 +7,10 @@
     {
       "source": "/.well-known/assetlinks.json",
       "destination": "https://poddvsjotivfzwjwfqqn.supabase.co/functions/v1/deep-link-redirect/.well-known/assetlinks.json"
+    },
+    {
+      "source": "/ambssurvey",
+      "destination": "/ambssurvey.html"
     }
   ]
 }
