@@ -3,355 +3,336 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StockBud - AMBS Survey</title>
+<title>StockBud — AMBS Survey</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --green:#1db954;--gold:#d8a840;--gold-h:#e8bc54;
+  --green:#1db954;--green-d:#0e6e30;--gold:#d8a840;
   --bg:#07100a;--card:#0f1a12;
   --border:rgba(29,185,84,0.13);
-  --text:#eef4ee;--sub:#6b8a6b;--dim:#2a382a;
+  --text:#eef4ee;--sub:#8ca58c;--dim:#2a382a;
+  --accent:var(--green);
 }
+[data-path="non"]{--accent:#3a8fff;--accent-d:#1f5fbf;}
 html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-body::after{content:'';position:fixed;inset:0;opacity:.025;pointer-events:none;z-index:9999;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
-.b1{width:650px;height:650px;background:radial-gradient(circle,rgba(29,185,84,.13),transparent 70%);top:-250px;left:-180px}
-.b2{width:420px;height:420px;background:radial-gradient(circle,rgba(216,168,64,.07),transparent 70%);bottom:80px;right:-80px}
-.wrap{max-width:640px;margin:0 auto;padding:0 20px 60px;position:relative;z-index:1}
+.b1{width:600px;height:600px;background:radial-gradient(circle,rgba(29,185,84,.16),transparent 70%);top:-220px;left:-160px;transition:background .6s}
+.b2{width:420px;height:420px;background:radial-gradient(circle,rgba(216,168,64,.07),transparent 70%);bottom:60px;right:-80px}
+[data-path="non"] .b1{background:radial-gradient(circle,rgba(58,143,255,.18),transparent 70%)}
+.wrap{max-width:640px;margin:0 auto;padding:0 22px 80px;position:relative;z-index:1}
 header{padding:28px 0 0;display:flex;align-items:center;justify-content:center;gap:12px}
-.logo-img{width:44px;height:44px;border-radius:11px;filter:drop-shadow(0 0 16px rgba(29,185,84,.5))}
-.logo-wordmark{font-size:21px;font-weight:800;letter-spacing:-.3px;color:var(--gold)}
-.hero{text-align:center;padding:44px 0 32px}
-.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(29,185,84,.09);border:1px solid rgba(29,185,84,.2);border-radius:100px;padding:5px 14px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--green);margin-bottom:22px}
-.dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 2s ease-in-out infinite}
+.logo-img{width:44px;height:44px;border-radius:11px;filter:drop-shadow(0 0 16px rgba(29,185,84,.4))}
+.logo-wordmark{font-size:22px;font-weight:800;letter-spacing:-.4px}
+.logo-wordmark em{color:var(--green);font-style:normal}
+.hero{text-align:center;padding:38px 0 26px}
+.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(29,185,84,.09);border:1px solid rgba(29,185,84,.22);border-radius:100px;padding:5px 14px;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;transition:all .4s}
+[data-path="non"] .pill{background:rgba(58,143,255,.08);border-color:rgba(58,143,255,.22)}
+.dot{width:5px;height:5px;background:var(--accent);border-radius:50%;animation:blink 2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.6)}}
-h1{font-size:clamp(26px,5vw,44px);font-weight:900;line-height:1.07;letter-spacing:-1.3px;margin-bottom:16px}
-.g{color:var(--green)}.au{color:var(--gold)}
-.subtext{font-size:14px;font-weight:500;color:var(--sub);line-height:1.65;max-width:440px;margin:0 auto 28px}
-.stats{display:flex;align-items:center;justify-content:center;gap:22px}
-.stat{text-align:center}
-.sv{font-size:20px;font-weight:800;color:var(--green);letter-spacing:-.4px}
-.sl{font-size:9px;font-weight:700;color:var(--sub);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
-.sdiv{width:1px;height:32px;background:var(--dim);opacity:.7}
-.prog{margin:32px 0 10px}
+h1{font-size:clamp(28px,5vw,42px);font-weight:900;line-height:1.08;letter-spacing:-1.2px;margin-bottom:14px}
+.g{color:var(--green)}.au{color:var(--gold)}.bl{color:#3a8fff}
+.subtext{font-size:14px;font-weight:500;color:var(--sub);line-height:1.6;max-width:440px;margin:0 auto 24px}
+.prog{margin:24px 0 14px}
 .pmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
 .plabel{font-size:9.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--sub)}
-.pcount{font-size:9.5px;font-weight:700;color:var(--green)}
-.pbar{background:rgba(255,255,255,.04);border-radius:100px;height:2px;overflow:hidden}
-.pfill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:100px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px 28px 26px;
-  box-shadow:0 8px 32px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.018) inset;
-  position:relative;overflow:hidden;margin-bottom:12px;animation:up .36s ease both}
-.card::before{content:'';position:absolute;top:0;left:0;width:100px;height:1px;background:linear-gradient(90deg,var(--green),transparent);opacity:.45}
-.card::after{content:'';position:absolute;bottom:0;right:0;width:80px;height:1px;background:linear-gradient(270deg,rgba(216,168,64,.25),transparent)}
-@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.qtag{font-size:9.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--green);margin-bottom:9px;display:flex;align-items:center;gap:8px}
-.qtag::after{content:'';flex:1;height:1px;background:var(--border)}
-.qtext{font-size:18px;font-weight:700;line-height:1.28;letter-spacing:-.2px;margin-bottom:24px}
-.opts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:11px;
-  border:1px solid rgba(255,255,255,.055);background:rgba(255,255,255,.018);
-  cursor:pointer;transition:all .15s ease;font-size:13px;font-weight:600;
-  color:var(--sub);position:relative;overflow:hidden;user-select:none}
-.opt::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(29,185,84,.065),transparent);opacity:0;transition:opacity .15s}
-.opt:hover{border-color:rgba(29,185,84,.28);color:var(--text);transform:translateX(2px)}
-.opt:hover::before{opacity:1}
-.opt.sel{border-color:var(--green);background:rgba(29,185,84,.075);color:var(--text);box-shadow:0 0 0 1px rgba(29,185,84,.1)}
-.opt.sel::before{opacity:1}
-.chk{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.1);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:8px;transition:all .15s;margin-left:auto}
-.opt.sel .chk{background:var(--green);border-color:var(--green);color:#000}
-.em{font-size:16px;flex-shrink:0}
-.btnrow{display:flex;gap:10px;margin-top:6px}
-.bback{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:11px;
-  padding:13px 18px;font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;
-  color:var(--sub);cursor:pointer;transition:all .17s;white-space:nowrap}
-.bback:hover{border-color:rgba(255,255,255,.14);color:var(--text)}
-.bnext{flex:1;background:var(--gold);border:none;border-radius:11px;padding:15px 22px;
-  font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;letter-spacing:.3px;
-  color:#07100a;cursor:pointer;transition:all .18s;box-shadow:0 4px 22px rgba(216,168,64,.3)}
-.bnext:hover{background:var(--gold-h);transform:translateY(-1px);box-shadow:0 6px 28px rgba(216,168,64,.38)}
-.bnext:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
-.fnote{text-align:center;font-size:10px;font-weight:500;color:var(--dim);margin-top:5px}
-.success{display:none;text-align:center;padding:52px 20px}
-.success.show{display:block;animation:up .4s ease both}
-.tick{width:68px;height:68px;background:rgba(29,185,84,.1);border:1px solid rgba(29,185,84,.28);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;
-  font-size:28px;box-shadow:0 0 28px rgba(29,185,84,.18)}
-.success h2{font-size:26px;font-weight:900;letter-spacing:-.6px;margin-bottom:11px}
-.success p{font-size:14.5px;font-weight:500;color:var(--sub);line-height:1.62;max-width:360px;margin:0 auto 26px}
-.badge{display:inline-flex;align-items:center;gap:10px;background:rgba(29,185,84,.08);
-  border:1px solid rgba(29,185,84,.2);border-radius:13px;padding:11px 18px;
-  font-size:13px;font-weight:700;color:var(--green);text-decoration:none;transition:all .18s}
-.badge:hover{background:rgba(29,185,84,.13);border-color:rgba(29,185,84,.35)}
-.badge img{width:22px;height:22px;border-radius:6px}
-.path-tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:700;
-  letter-spacing:1.4px;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:14px}
-.path-investor{background:rgba(29,185,84,.1);color:var(--green);border:1px solid rgba(29,185,84,.2)}
-.path-noninvestor{background:rgba(216,168,64,.1);color:var(--gold);border:1px solid rgba(216,168,64,.2)}
+.pcount{font-size:9.5px;font-weight:700;color:var(--accent);transition:color .3s}
+.pbar{background:rgba(255,255,255,.04);border-radius:100px;height:3px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:100px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px 28px 26px;box-shadow:0 8px 32px rgba(0,0,0,.5);position:relative;overflow:hidden;margin-bottom:14px;animation:up .36s ease both;display:none}
+.card.show{display:block}
+.card::before{content:'';position:absolute;top:0;left:0;width:100px;height:1px;background:linear-gradient(90deg,var(--accent),transparent);opacity:.55}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.qtag{font-size:9px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.qtitle{font-size:18px;font-weight:700;line-height:1.35;margin-bottom:18px;letter-spacing:-.3px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(255,255,255,.02);border:1.5px solid rgba(255,255,255,.05);border-radius:12px;cursor:pointer;transition:all .18s ease;font-size:14px;font-weight:500;color:var(--text);user-select:none}
+.opt:hover{background:rgba(29,185,84,.05);border-color:rgba(29,185,84,.2)}
+[data-path="non"] .opt:hover{background:rgba(58,143,255,.05);border-color:rgba(58,143,255,.22)}
+.opt.sel{background:rgba(29,185,84,.1);border-color:var(--accent);color:var(--text)}
+[data-path="non"] .opt.sel{background:rgba(58,143,255,.12);border-color:var(--accent)}
+.chk{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:900;color:#fff;transition:all .18s}
+.opt.sel .chk{background:var(--accent);border-color:var(--accent)}
+.other-input{display:none;margin-top:10px;width:100%;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.07);border-radius:12px;padding:13px 16px;font-family:inherit;font-size:14px;color:var(--text);outline:none;transition:all .18s}
+.other-input.show{display:block;animation:up .25s ease both}
+.other-input:focus{border-color:var(--accent);background:rgba(29,185,84,.04)}
+[data-path="non"] .other-input:focus{background:rgba(58,143,255,.05)}
+.nav{display:flex;gap:10px;margin-top:18px}
+.btn{flex:1;padding:14px 22px;border-radius:12px;border:none;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.2px}
+.btn-pri{background:var(--accent);color:#06170c}
+[data-path="non"] .btn-pri{color:#001833}
+.btn-pri:hover:not(:disabled){filter:brightness(1.08);transform:translateY(-1px)}
+.btn-pri:disabled{background:rgba(255,255,255,.04);color:rgba(255,255,255,.2);cursor:not-allowed}
+.btn-sec{flex:0 0 auto;padding:14px 18px;background:transparent;color:var(--sub);border:1.5px solid rgba(255,255,255,.08)}
+.btn-sec:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.success{display:none;text-align:center;padding:50px 24px;animation:up .5s ease both}
+.success.show{display:block}
+.tick{width:64px;height:64px;border-radius:50%;background:rgba(29,185,84,.12);border:2px solid var(--green);display:inline-flex;align-items:center;justify-content:center;font-size:32px;color:var(--green);margin-bottom:22px;font-weight:900}
+.success h2{font-size:26px;font-weight:800;letter-spacing:-.6px;margin-bottom:14px}
+.success p{font-size:14.5px;color:var(--sub);line-height:1.65;max-width:420px;margin:0 auto 26px}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--green);color:#06170c;border-radius:100px;font-size:14px;font-weight:800;text-decoration:none;letter-spacing:.2px;transition:all .2s}
+.badge:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 8px 24px rgba(29,185,84,.32)}
+.foot{text-align:center;font-size:10px;font-weight:600;color:var(--sub);letter-spacing:1.4px;text-transform:uppercase;margin-top:32px;opacity:.6}
+.err{display:none;margin-top:12px;padding:11px 14px;background:rgba(255,80,80,.06);border:1px solid rgba(255,80,80,.2);border-radius:10px;font-size:13px;color:#ff8a8a}
+.err.show{display:block;animation:up .25s ease both}
+@media (max-width:480px){
+  .card{padding:24px 20px 22px;border-radius:14px}
+  .qtitle{font-size:16.5px}
+  .opt{padding:13px 14px;font-size:13.5px}
+  h1{font-size:26px}
+}
 </style>
 </head>
 <body>
 <div class="blob b1"></div>
 <div class="blob b2"></div>
 <div class="wrap">
-
 <header>
-  <svg class="logo-img" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg"><rect width="44" height="44" rx="11" fill="#1db954"/><path d="M10 30 L18 22 L24 26 L34 14" stroke="#d8a840" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="14" r="2.5" fill="#d8a840"/></svg>
-  <div class="logo-wordmark">StockBud</div>
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="StockBud" class="logo-img"><rect width="100" height="100" rx="22" fill="#0a3a1f"/><g fill="none" stroke="#3fbf52" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M 22 78 A 32 32 0 1 1 78 32"/><path d="M 22 78 L 22 90 L 30 78"/></g><path d="M 28 64 L 44 48 L 56 56 L 78 30" fill="none" stroke="#3fbf52" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M 70 28 L 80 28 L 80 38" fill="none" stroke="#3fbf52" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="logo-wordmark">Stock<em>Bud</em></div>
 </header>
 
 <div class="hero">
-  <div class="pill"><span class="dot"></span>AMBS Survey</div>
-  <h1>Help us build something<br>you will <span class="au">actually use.</span></h1>
-  <p class="subtext">20 to 30 seconds. Your answers go directly into what we build for AMBS students.</p>
-  <div class="stats">
-    <div class="stat"><div class="sv">30s</div><div class="sl">To complete</div></div>
-    <div class="sdiv"></div>
-    <div class="stat"><div class="sv">AMBS</div><div class="sl">Leaderboard</div></div>
-    <div class="sdiv"></div>
-    <div class="stat"><div class="sv">100%</div><div class="sl">Anonymous</div></div>
+  <div class="pill"><span class="dot"></span><span id="path-label">AMBS Stand · Quick Survey</span></div>
+  <h1 id="hero-h1">Help us build something<br>you'll <span class="g">actually</span> use.</h1>
+  <p class="subtext" id="hero-sub">Two minutes. Four questions. Direct input into what we build at StockBud.</p>
+</div>
+
+<div class="prog">
+  <div class="pmeta">
+    <span class="plabel">Progress</span>
+    <span class="pcount" id="pc">Question 1 of 4</span>
   </div>
+  <div class="pbar"><div class="pfill" id="pf"></div></div>
 </div>
 
 <div id="survey">
-  <div class="prog">
-    <div class="pmeta"><span class="plabel">Progress</span><span class="pcount" id="pc">Question 1 of 4</span></div>
-    <div class="pbar"><div class="pfill" id="pf"></div></div>
-  </div>
 
-  <!-- Q1: GATING QUESTION - same for both paths -->
-  <div class="card" id="q1">
-    <div class="qtag">Confirmation</div>
-    <div class="qtext">Do you currently invest? (e.g. stocks, funds, crypto, etc.)</div>
-    <div class="opts">
-      <div class="opt" data-val="yes" data-path="investor" onclick="selectGate(this)"><span class="em">&#x1F4C8;</span>Yes, I invest<span class="chk"></span></div>
-      <div class="opt" data-val="no" data-path="noninvestor" onclick="selectGate(this)"><span class="em">&#x1F4B0;</span>No, I don't invest<span class="chk"></span></div>
-    </div>
+<!-- Q1: confirmation (always shown first) -->
+<div class="card show" id="q1">
+  <div class="qtag">Confirmation</div>
+  <div class="qtitle">Do you currently invest? <span style="color:var(--sub);font-weight:500">(stocks, funds, crypto, etc.)</span></div>
+  <div class="opts">
+    <div class="opt" data-val="yes" data-path="investor"><div class="chk"></div>Yes — I invest</div>
+    <div class="opt" data-val="no" data-path="non"><div class="chk"></div>No — I don't invest</div>
   </div>
+  <div class="nav"><button class="btn btn-pri" id="bnx" disabled>Continue</button></div>
+</div>
 
-  <!-- INVESTOR PATH: Q2 -->
-  <div class="card" id="i-q2" style="display:none">
-    <div class="path-tag path-investor">&#x1F4CA; Investor Path</div>
-    <div class="qtag">Question 02</div>
-    <div class="qtext">Which platform do you currently use?</div>
-    <div class="opts">
-      <div class="opt" data-val="Trading 212"><span class="em">&#x1F7E2;</span>Trading 212<span class="chk"></span></div>
-      <div class="opt" data-val="Robinhood"><span class="em">&#x1F426;</span>Robinhood<span class="chk"></span></div>
-      <div class="opt" data-val="eToro"><span class="em">&#x1F30D;</span>eToro<span class="chk"></span></div>
-      <div class="opt" data-val="Other / Multiple"><span class="em">&#x1F4F1;</span>Other / Multiple<span class="chk"></span></div>
-    </div>
+<!-- ===== INVESTOR PATH (q2i, q3i, q4i) ===== -->
+<div class="card" id="q2i" data-q="2" data-pathfor="investor">
+  <div class="qtag">How you invest</div>
+  <div class="qtitle">Which platform(s) do you currently use?</div>
+  <div class="opts">
+    <div class="opt"><div class="chk"></div>Trading 212</div>
+    <div class="opt"><div class="chk"></div>Robinhood</div>
+    <div class="opt"><div class="chk"></div>eToro</div>
+    <div class="opt"><div class="chk"></div>Other / Multiple</div>
+    <div class="opt opt-other"><div class="chk"></div>Write in</div>
   </div>
+  <input type="text" class="other-input" placeholder="Tell us…" maxlength="200">
+  <div class="nav"><button class="btn btn-sec" data-act="back">Back</button><button class="btn btn-pri" data-act="next" disabled>Continue</button></div>
+</div>
 
-  <!-- INVESTOR PATH: Q3 -->
-  <div class="card" id="i-q3" style="display:none">
-    <div class="path-tag path-investor">&#x1F4CA; Investor Path</div>
-    <div class="qtag">Question 03</div>
-    <div class="qtext">Where do you go to talk about investing with others?</div>
-    <div class="opts">
-      <div class="opt" data-val="Reddit / X / Discord"><span class="em">&#x1F4AC;</span>Reddit / X / Discord<span class="chk"></span></div>
-      <div class="opt" data-val="Friends / peers"><span class="em">&#x1F465;</span>Friends and peers<span class="chk"></span></div>
-      <div class="opt" data-val="Nowhere - I invest alone"><span class="em">&#x1F9CD;</span>Nowhere, I invest alone<span class="chk"></span></div>
-      <div class="opt" data-val="Finance societies"><span class="em">&#x1F3DB;</span>Finance societies<span class="chk"></span></div>
-    </div>
+<div class="card" id="q3i" data-q="3" data-pathfor="investor">
+  <div class="qtag">The isolation problem</div>
+  <div class="qtitle">Where do you currently go to talk about investing with others?</div>
+  <div class="opts">
+    <div class="opt"><div class="chk"></div>Reddit / X / Discord</div>
+    <div class="opt"><div class="chk"></div>Friends / peers</div>
+    <div class="opt"><div class="chk"></div>Nowhere — I invest alone</div>
+    <div class="opt"><div class="chk"></div>Finance societies</div>
+    <div class="opt opt-other"><div class="chk"></div>Write in</div>
   </div>
+  <input type="text" class="other-input" placeholder="Tell us…" maxlength="200">
+  <div class="nav"><button class="btn btn-sec" data-act="back">Back</button><button class="btn btn-pri" data-act="next" disabled>Continue</button></div>
+</div>
 
-  <!-- INVESTOR PATH: Q4 -->
-  <div class="card" id="i-q4" style="display:none">
-    <div class="path-tag path-investor">&#x1F4CA; Investor Path</div>
-    <div class="qtag">Question 04</div>
-    <div class="qtext">Which of these would you want as part of how you invest?</div>
-    <div class="opts">
-      <div class="opt" data-val="Portfolio comparison vs mates"><span class="em">&#x1F3C6;</span>Portfolio comparison vs mates<span class="chk"></span></div>
-      <div class="opt" data-val="Fantasy Football style investment leagues"><span class="em">&#x26BD;</span>Fantasy Football style investment leagues<span class="chk"></span></div>
-      <div class="opt" data-val="Easy discussion and sharing strategies"><span class="em">&#x1F4A1;</span>Easy discussion, share strategies and experiences<span class="chk"></span></div>
-      <div class="opt" data-val="All of the above"><span class="em">&#x2728;</span>All of the above<span class="chk"></span></div>
-    </div>
+<div class="card" id="q4i" data-q="4" data-pathfor="investor">
+  <div class="qtag">What would make you switch</div>
+  <div class="qtitle">Which of these would you want as part of how you invest?</div>
+  <div class="opts">
+    <div class="opt"><div class="chk"></div>Portfolio comparison vs mates</div>
+    <div class="opt"><div class="chk"></div>Fantasy-football style investment leagues</div>
+    <div class="opt"><div class="chk"></div>Easy discussion — share strategies & experiences</div>
+    <div class="opt"><div class="chk"></div>All of the above</div>
+    <div class="opt opt-other"><div class="chk"></div>Write in</div>
   </div>
+  <input type="text" class="other-input" placeholder="Tell us…" maxlength="200">
+  <div class="nav"><button class="btn btn-sec" data-act="back">Back</button><button class="btn btn-pri" data-act="next" disabled>Submit</button></div>
+</div>
 
-  <!-- NON-INVESTOR PATH: Q2 -->
-  <div class="card" id="n-q2" style="display:none">
-    <div class="path-tag path-noninvestor">&#x1F4B0; Non-Investor Path</div>
-    <div class="qtag">Question 02</div>
-    <div class="qtext">Your savings are currently sitting in...</div>
-    <div class="opts">
-      <div class="opt" data-val="A current account"><span class="em">&#x1F3E6;</span>A current account<span class="chk"></span></div>
-      <div class="opt" data-val="A savings account / ISA"><span class="em">&#x1F4B3;</span>A savings account or ISA<span class="chk"></span></div>
-      <div class="opt" data-val="Both"><span class="em">&#x2696;&#xFE0F;</span>Both<span class="chk"></span></div>
-      <div class="opt" data-val="I don't really save"><span class="em">&#x1F937;</span>I don't really save<span class="chk"></span></div>
-    </div>
+<!-- ===== NON-INVESTOR PATH (q2n, q3n, q4n) ===== -->
+<div class="card" id="q2n" data-q="2" data-pathfor="non">
+  <div class="qtag">Your money right now</div>
+  <div class="qtitle">Your savings are currently sitting in…</div>
+  <div class="opts">
+    <div class="opt"><div class="chk"></div>A current account</div>
+    <div class="opt"><div class="chk"></div>A savings account / ISA</div>
+    <div class="opt"><div class="chk"></div>Both</div>
+    <div class="opt"><div class="chk"></div>I don't really save</div>
+    <div class="opt opt-other"><div class="chk"></div>Write in</div>
   </div>
+  <input type="text" class="other-input" placeholder="Tell us…" maxlength="200">
+  <div class="nav"><button class="btn btn-sec" data-act="back">Back</button><button class="btn btn-pri" data-act="next" disabled>Continue</button></div>
+</div>
 
-  <!-- NON-INVESTOR PATH: Q3 -->
-  <div class="card" id="n-q3" style="display:none">
-    <div class="path-tag path-noninvestor">&#x1F4B0; Non-Investor Path</div>
-    <div class="qtag">Question 03</div>
-    <div class="qtext">What's the main reason you haven't started investing yet?</div>
-    <div class="opts">
-      <div class="opt" data-val="Feels too risky"><span class="em">&#x1F630;</span>Feels too risky<span class="chk"></span></div>
-      <div class="opt" data-val="Don't know where to start"><span class="em">&#x1F5FA;&#xFE0F;</span>Don't know where to start<span class="chk"></span></div>
-      <div class="opt" data-val="Not enough money"><span class="em">&#x1F4B8;</span>Not enough money<span class="chk"></span></div>
-      <div class="opt" data-val="Never thought about it"><span class="em">&#x1F914;</span>Never thought about it<span class="chk"></span></div>
-    </div>
+<div class="card" id="q3n" data-q="3" data-pathfor="non">
+  <div class="qtag">What's holding you back</div>
+  <div class="qtitle">What's the main reason you haven't started investing yet?</div>
+  <div class="opts">
+    <div class="opt"><div class="chk"></div>Feels too risky</div>
+    <div class="opt"><div class="chk"></div>Don't know where to start</div>
+    <div class="opt"><div class="chk"></div>Not enough money</div>
+    <div class="opt"><div class="chk"></div>Never thought about it</div>
+    <div class="opt opt-other"><div class="chk"></div>Write in</div>
   </div>
+  <input type="text" class="other-input" placeholder="Tell us…" maxlength="200">
+  <div class="nav"><button class="btn btn-sec" data-act="back">Back</button><button class="btn btn-pri" data-act="next" disabled>Continue</button></div>
+</div>
 
-  <!-- NON-INVESTOR PATH: Q4 -->
-  <div class="card" id="n-q4" style="display:none">
-    <div class="path-tag path-noninvestor">&#x1F4B0; Non-Investor Path</div>
-    <div class="qtag">Question 04</div>
-    <div class="qtext">If you could join a free, no-real-money stock-picking league against other AMBS students, would you sign up?</div>
-    <div class="opts">
-      <div class="opt" data-val="Definitely yes"><span class="em">&#x1F525;</span>Definitely yes<span class="chk"></span></div>
-      <div class="opt" data-val="Probably yes"><span class="em">&#x1F44D;</span>Probably yes<span class="chk"></span></div>
-      <div class="opt" data-val="Probably not"><span class="em">&#x1F914;</span>Probably not<span class="chk"></span></div>
-      <div class="opt" data-val="No"><span class="em">&#x274C;</span>No<span class="chk"></span></div>
-    </div>
+<div class="card" id="q4n" data-q="4" data-pathfor="non">
+  <div class="qtag">The hook</div>
+  <div class="qtitle">Free, no-real-money stock-picking league against other AMBS students — would you sign up?</div>
+  <div class="opts">
+    <div class="opt"><div class="chk"></div>Definitely yes</div>
+    <div class="opt"><div class="chk"></div>Probably yes</div>
+    <div class="opt"><div class="chk"></div>Probably not</div>
+    <div class="opt"><div class="chk"></div>No</div>
+    <div class="opt opt-other"><div class="chk"></div>Write in</div>
   </div>
+  <input type="text" class="other-input" placeholder="Tell us…" maxlength="200">
+  <div class="nav"><button class="btn btn-sec" data-act="back">Back</button><button class="btn btn-pri" data-act="next" disabled>Submit</button></div>
+</div>
 
-  <div class="btnrow" id="btnrow">
-    <button class="bback" id="bbk" style="display:none" onclick="back()">Back</button>
-    <button class="bnext" id="bnx" onclick="next()" disabled>Continue</button>
-  </div>
-  <p class="fnote">stock-bud.com &nbsp;&#xB7;&nbsp; @stockbudapp &nbsp;&#xB7;&nbsp; Connect, Compare, Compete</p>
+<div class="err" id="err"></div>
+
 </div>
 
 <div class="success" id="suc">
-  <div class="tick">&#x2713;</div>
-  <h2>You're in. <span class="g">Thanks.</span></h2>
-  <p>Your answers feed directly into what we build for AMBS. StockBud is live on the App Store now, free to download.</p>
-  <a class="badge" href="https://apps.apple.com/app/stockbud" target="_blank">
-    <svg style="width:22px;height:22px;border-radius:6px" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="22" rx="6" fill="#1db954"/><path d="M5 15 L9 11 L12 13 L17 7" stroke="#d8a840" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Download StockBud, Free on iOS
-  </a>
+  <div class="tick">&check;</div>
+  <h2>You're shaping the <span class="g">future.</span></h2>
+  <p>Thank you. Your answers feed directly into what we build next. StockBud is live on the App Store — free.</p>
+  <a class="badge" href="https://apps.apple.com/app/stockbud" target="_blank" rel="noopener">Download StockBud — Free on iOS &rarr;</a>
 </div>
 
+<div class="foot">Connect · Compare · Compete</div>
 </div>
 
 <script>
-// ── SUPABASE CONFIG ──────────────────────────────────────────────
-// Replace these two values with your actual Supabase project credentials.
-// Jack: get these from the Supabase dashboard under Settings > API.
-const SUPABASE_URL = 'https://poddvsjotivfzwjwfqqn.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvZGR2c2pvdGl2Znp3andmcXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNTU5NDYsImV4cCI6MjA4MzYzMTk0Nn0.-PgNNdmj4uWSyg0xPTVojK8e2nbakVmgTbyXQguV0VM';
-// Table name in Supabase: ambs_survey_responses
-// Required columns: id (uuid, default gen), created_at (timestamp, default now()),
-//   investor (boolean), q2 (text), q3 (text), q4 (text), path (text)
-// ────────────────────────────────────────────────────────────────
+const SUPABASE_URL='https://poddvsjotivfzwjwfqqn.supabase.co';
+const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvZGR2c2pvdGl2Znp3andmcXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNTU5NDYsImV4cCI6MjA4MzYzMTk0Nn0.-PgNNdmj4uWSyg0xPTVojK8e2nbakVmgTbyXQguV0VM';
 
-const ans = { investor: null, q2: null, q3: null, q4: null };
-let path = null; // 'investor' or 'noninvestor'
-let step = 1;    // 1 = q1, 2 = q2, 3 = q3, 4 = q4
+const ans={};
+let path=null;
+let stepIdx=0;
+const orderInvestor=['q1','q2i','q3i','q4i'];
+const orderNonInv=['q1','q2n','q3n','q4n'];
+function order(){return path==='non'?orderNonInv:orderInvestor;}
 
-const TOTAL = 4;
+function qsa(s,r){return Array.from((r||document).querySelectorAll(s));}
+function qs(s,r){return (r||document).querySelector(s);}
 
-function updateProgress() {
-  document.getElementById('pf').style.width = (((step - 1) / TOTAL) * 100) + '%';
-  document.getElementById('pc').textContent = 'Question ' + step + ' of ' + TOTAL;
-}
-
-function cardId(s) {
-  if (s === 1) return 'q1';
-  if (!path) return null;
-  return (path === 'investor' ? 'i' : 'n') + '-q' + s;
-}
-
-function showStep(s) {
-  // hide all
-  document.querySelectorAll('.card').forEach(c => c.style.display = 'none');
-  const id = cardId(s);
-  if (id) document.getElementById(id).style.display = 'block';
-  document.getElementById('bbk').style.display = s > 1 ? '' : 'none';
-  const bnx = document.getElementById('bnx');
-  bnx.textContent = s === TOTAL ? 'Submit' : 'Continue';
-  // enable if already answered
-  const key = s === 1 ? 'investor' : 'q' + s;
-  bnx.disabled = ans[key] === null || ans[key] === undefined;
-  updateProgress();
-}
-
-function selectGate(el) {
-  // clear previous selections on q1
-  document.querySelectorAll('#q1 .opt').forEach(o => {
-    o.classList.remove('sel');
-    o.querySelector('.chk').innerHTML = '';
+// Q1 click
+qsa('#q1 .opt').forEach(o=>{
+  o.addEventListener('click',()=>{
+    qsa('#q1 .opt').forEach(x=>x.classList.remove('sel'));
+    o.classList.add('sel');
+    ans.investor=o.dataset.val==='yes';
+    ans.path=o.dataset.path;
+    path=o.dataset.path;
+    document.body.dataset.path=path;
+    qs('#bnx').disabled=false;
   });
-  el.classList.add('sel');
-  el.querySelector('.chk').innerHTML = '&#x2713;';
-  path = el.dataset.path;
-  ans.investor = el.dataset.val === 'yes';
-  document.getElementById('bnx').disabled = false;
-}
+});
+qs('#bnx').addEventListener('click',()=>nextStep());
 
-function selectOpt(el) {
-  const card = el.closest('.card');
-  card.querySelectorAll('.opt').forEach(o => {
-    o.classList.remove('sel');
-    o.querySelector('.chk').innerHTML = '';
+// Wire branched questions
+qsa('.card[data-q]').forEach(card=>{
+  const opts=qsa('.opt',card);
+  const other=qs('.other-input',card);
+  const nextBtn=qs('[data-act="next"]',card);
+  const backBtn=qs('[data-act="back"]',card);
+  opts.forEach(o=>{
+    o.addEventListener('click',()=>{
+      opts.forEach(x=>x.classList.remove('sel'));
+      o.classList.add('sel');
+      const isOther=o.classList.contains('opt-other');
+      other.classList.toggle('show',isOther);
+      if(isOther){other.focus();nextBtn.disabled=!other.value.trim();}
+      else{nextBtn.disabled=false;}
+      card._chosen={isOther,label:o.textContent.trim()};
+    });
   });
-  el.classList.add('sel');
-  el.querySelector('.chk').innerHTML = '&#x2713;';
-  const key = 'q' + step;
-  ans[key] = el.dataset.val;
-  document.getElementById('bnx').disabled = false;
-}
-
-// Wire up non-gate options
-document.querySelectorAll('.card:not(#q1) .opt').forEach(o => {
-  o.addEventListener('click', function() { selectOpt(this); });
+  other.addEventListener('input',()=>{
+    if(card._chosen&&card._chosen.isOther) nextBtn.disabled=!other.value.trim();
+  });
+  nextBtn.addEventListener('click',()=>{
+    const q=card.dataset.q;
+    const v=card._chosen.isOther?('Other: '+other.value.trim()):card._chosen.label;
+    ans['q'+q]=v;
+    nextStep();
+  });
+  backBtn.addEventListener('click',()=>prevStep());
 });
 
-function next() {
-  if (step === TOTAL) { submit(); return; }
-  step++;
-  showStep(step);
+function showStep(){
+  qsa('.card').forEach(c=>c.classList.remove('show'));
+  const id=order()[stepIdx];
+  qs('#'+id).classList.add('show');
+  qs('#pc').textContent='Question '+(stepIdx+1)+' of 4';
+  qs('#pf').style.width=(((stepIdx)/3)*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextStep(){
+  if(stepIdx>=3){submit();return;}
+  stepIdx++;
+  showStep();
+}
+function prevStep(){
+  if(stepIdx>0){stepIdx--;showStep();}
 }
 
-function back() {
-  if (step > 1) { step--; showStep(step); }
-}
-
-async function submit() {
-  document.getElementById('bnx').disabled = true;
-  document.getElementById('bnx').textContent = 'Submitting...';
-
-  const payload = {
-    investor: ans.investor,
-    q2: ans.q2,
-    q3: ans.q3,
-    q4: ans.q4,
-    path: path,
+async function submit(){
+  qs('#err').classList.remove('show');
+  const payload={
+    investor: !!ans.investor,
+    q2: ans.q2||null,
+    q3: ans.q3||null,
+    q4: ans.q4||null,
+    path: ans.path||null,
     source: 'ambssurvey'
   };
-
-  try {
-    const res = await fetch(SUPABASE_URL + '/rest/v1/ambs_survey_responses', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        'Prefer': 'return=minimal'
+  try{
+    const r=await fetch(SUPABASE_URL+'/rest/v1/ambs_survey_responses',{
+      method:'POST',
+      headers:{
+        'apikey':SUPABASE_ANON,
+        'Authorization':'Bearer '+SUPABASE_ANON,
+        'Content-Type':'application/json',
+        'Prefer':'return=minimal'
       },
-      body: JSON.stringify(payload)
+      body:JSON.stringify(payload)
     });
-
-    if (!res.ok) {
-      console.error('Supabase error:', res.status, await res.text());
+    if(!r.ok){
+      const t=await r.text();
+      throw new Error('HTTP '+r.status+' '+t.slice(0,180));
     }
-  } catch (e) {
-    console.error('Submit failed:', e);
+    qs('#survey').style.display='none';
+    qs('#suc').classList.add('show');
+    qs('.prog').style.display='none';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(e){
+    qs('#err').textContent='Submit failed: '+e.message+'. Show this to a StockBud team member.';
+    qs('#err').classList.add('show');
+    console.error(e);
   }
-
-  // Always show success regardless of network outcome
-  document.getElementById('survey').style.display = 'none';
-  document.getElementById('suc').classList.add('show');
 }
 
 // Init
-showStep(1);
+document.body.dataset.path='investor';
+showStep();
 </script>
 </body>
 </html>
