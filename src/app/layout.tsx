@@ -76,7 +76,7 @@ export default function RootLayout({
         <Script
           src="https://www.ameportal.com/tracker.js"
           data-website-id="m57671thnptbnhyz0yjazjf68x843k74"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </head>
       <body className="bg-background text-foreground antialiased">
