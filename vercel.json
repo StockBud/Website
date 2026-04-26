@@ -1,14 +1,16 @@
 {
-    "framework": null,
-    "outputDirectory": ".",
-    "buildCommand": null,
-    "installCommand": null,
-    "cleanUrls": true,
-    "trailingSlash": false,
-    "rewrites": [
-          { "source": "/league/:code", "destination": "/league/index.html" },
-          { "source": "/post/:id", "destination": "/post/index.html" },
-          { "source": "/profile/:username", "destination": "/profile/index.html" },
-          { "source": "/room/:id", "destination": "/room/index.html" }
-    ]
+  "framework": null,
+  "outputDirectory": ".",
+  "buildCommand": null,
+  "installCommand": null,
+  "rewrites": [
+    { "source": "/auth/confirmed", "destination": "/auth/confirmed/index.html" },
+    { "source": "/privacy", "destination": "/privacy/index.html" },
+    { "source": "/terms", "destination": "/terms/index.html" },
+    { "source": "/league/:code", "destination": "/league/index.html" },
+    { "source": "/post/:id", "destination": "/post/index.html" },
+    { "source": "/profile/:username", "destination": "/profile/index.html" },
+    { "source": "/room/:id", "destination": "/room/index.html" }
+  ]
 }
+
