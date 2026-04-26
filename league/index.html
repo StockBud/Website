@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join League — StockBud</title>
+<meta name="description" content="You've been invited to join a fantasy trading league on StockBud.">
+<meta property="og:site_name" content="StockBud">
+<meta property="og:title" content="Join a league on StockBud">
+<meta property="og:description" content="You've been invited to join a fantasy trading league on StockBud.">
+<meta property="og:image" content="https://stock-bud.com/og-default.png">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{background:#111813;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:16px}
+  .card{width:100%;max-width:380px;background:#1C261F;border-radius:18px;padding:32px;text-align:center}
+  .brand{margin-bottom:24px;font-size:11px;font-weight:700;letter-spacing:.18em;color:#17CF54}
+  .spinner{margin:0 auto 16px;width:40px;height:40px;border:2px solid #2A3C30;border-top-color:#17CF54;border-radius:50%;animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  h1{font-size:18px;font-weight:700;margin-bottom:6px}
+  .sub{font-size:14px;color:#9DB8A6;margin-bottom:18px}
+  .row{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0 0}
+  .badge{display:inline-block;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:700}
+  .b-real{background:rgba(23,207,84,.15);color:#17CF54}
+  .b-demo{background:rgba(157,184,166,.15);color:#9DB8A6}
+  .b-active{background:rgba(23,207,84,.10);color:#17CF54}
+  .b-pending{background:rgba(157,184,166,.10);color:#9DB8A6}
+  .divider{height:1px;background:#2A3C30;margin:18px 0}
+  .label{margin-bottom:4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.10em;color:#9DB8A6}
+  .code{margin-bottom:18px;font-size:16px;font-weight:700;letter-spacing:.18em;color:#fff}
+  .btn{display:block;width:100%;border:0;background:#17CF54;color:#111813;padding:13px;border-radius:999px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:10px;cursor:pointer;transition:opacity .2s}
+  .btn:hover{opacity:.85}
+  .stores{display:flex;gap:8px}
+  .store{flex:1;display:block;padding:13px;border-radius:999px;border:1px solid #2A3C30;color:#fff;font-size:14px;font-weight:700;text-decoration:none;transition:opacity .2s}
+  .store:hover{opacity:.85}
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <p class="brand">STOCKBUD</p>
+  <div class="spinner" id="spinner"></div>
+  <h1 id="title">Loading…</h1>
+  <p class="sub" id="sub">Fetching league details</p>
+  <div id="meta" style="display:none">
+    <div class="row"><span class="badge" id="typeBadge"></span><span class="badge" id="statusBadge"></span></div>
+    <div class="divider"></div>
+    <p class="label">Invite Code</p>
+    <p class="code" id="inviteCode"></p>
+  </div>
+  <a class="btn" id="primaryBtn" href="#">Open in StockBud</a>
+  <div class="stores">
+    <a class="store" id="appStore" href="https://apps.apple.com/gb/app/stockbud/id6758548800">App Store</a>
+    <a class="store" id="playStore" href="https://play.google.com/store/apps/details?id=com.stockbud.app">Google Play</a>
+  </div>
+</div>
+<script>
+(function(){
+  var APP_STORE = "https://apps.apple.com/gb/app/stockbud/id6758548800";
+  var PLAY_STORE = "https://play.google.com/store/apps/details?id=com.stockbud.app";
+  var SUPABASE_URL = "https://poddvsjotivfzwjwfqqn.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvZGR2c2pvdGl2Znp3andmcXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNTU5NDYsImV4cCI6MjA4MzYzMTk0Nn0.-PgNNdmj4uWSyg0xPTVojK8e2nbakVmgTbyXQguV0VM";
+
+  // Pull /league/:code from URL
+  var path = window.location.pathname.replace(/\/+$/, "");
+  var code = decodeURIComponent(path.split("/").pop() || "").trim();
+  var ua = navigator.userAgent;
+  var isIOS = /iPad|iPhone|iPod/.test(ua);
+  var isAndroid = /Android/.test(ua);
+  var isMobile = isIOS || isAndroid;
+  var storeUrl = isIOS ? APP_STORE : (isAndroid ? PLAY_STORE : APP_STORE);
+  var primary = document.getElementById("primaryBtn");
+  primary.href = "stockbud://league/" + encodeURIComponent(code);
+
+  // Mobile: try deep link, fall back to store
+  if (isMobile && code) {
+    document.getElementById("title").textContent = "Opening " + (isIOS ? "App Store" : "Google Play") + "…";
+    document.getElementById("sub").textContent = "Download StockBud to join this league.";
+    primary.textContent = isIOS ? "Download on App Store" : "Get it on Google Play";
+    primary.href = storeUrl;
+    var t = Date.now();
+    window.location.href = "stockbud://league/" + encodeURIComponent(code);
+    setTimeout(function(){
+      if (document.visibilityState !== "hidden" && Date.now() - t < 3000) {
+        window.location.href = storeUrl;
+      }
+    }, 1500);
+    return;
+  }
+
+  if (!code) {
+    document.getElementById("spinner").style.display = "none";
+    document.getElementById("title").textContent = "Invalid league link";
+    document.getElementById("sub").textContent = "No invite code in this URL.";
+    primary.style.display = "none";
+    return;
+  }
+
+  // Desktop: fetch league info from Supabase
+  fetch(SUPABASE_URL + "/rest/v1/leagues?invite_code=eq." + encodeURIComponent(code) +
+        "&select=id,name,invite_code,league_type,status&limit=1", {
+    headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var league = (data && data[0]) || null;
+    document.getElementById("spinner").style.display = "none";
+    if (!league) {
+      document.getElementById("title").textContent = "League not found";
+      document.getElementById("sub").textContent = "This invite code may have expired.";
+      primary.style.display = "none";
+      document.title = "League not found — StockBud";
+      return;
+    }
+    document.getElementById("title").textContent = league.name;
+    document.getElementById("sub").style.display = "none";
+    var t = league.league_type === "real_money" ? "Real Money" : "Demo";
+    var s = league.status === "active" ? "Active" : "Pending";
+    var tb = document.getElementById("typeBadge"); tb.textContent = t;
+    tb.className = "badge " + (league.league_type === "real_money" ? "b-real" : "b-demo");
+    var sb = document.getElementById("statusBadge"); sb.textContent = s;
+    sb.className = "badge " + (league.status === "active" ? "b-active" : "b-pending");
+    document.getElementById("inviteCode").textContent = league.invite_code;
+    document.getElementById("meta").style.display = "block";
+    primary.textContent = "Join on StockBud";
+    document.title = "Join " + league.name + " — StockBud";
+  })
+  .catch(function(){
+    document.getElementById("spinner").style.display = "none";
+    document.getElementById("title").textContent = "Couldn't load league";
+    document.getElementById("sub").textContent = "Please try again later, or open the app.";
+  });
+})();
+</script>
+</body>
+</html>

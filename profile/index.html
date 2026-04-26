@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profile — StockBud</title>
+<meta name="description" content="View this trading profile on StockBud.">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="StockBud">
+<meta property="og:title" content="Profile — StockBud">
+<meta property="og:description" content="View this trading profile on StockBud.">
+<meta property="og:image" content="https://stock-bud.com/og-default.png">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{background:#111813;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:16px}
+  .card{width:100%;max-width:380px;background:#1C261F;border-radius:18px;padding:32px;text-align:center}
+  .brand{margin-bottom:24px;font-size:11px;font-weight:700;letter-spacing:.18em;color:#17CF54}
+  .spinner{margin:0 auto 16px;width:40px;height:40px;border:2px solid #2A3C30;border-top-color:#17CF54;border-radius:50%;animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .title{font-size:18px;font-weight:700;margin-bottom:6px}
+  .sub{font-size:14px;color:#9DB8A6;margin-bottom:18px}
+  .avatar{margin:0 auto 16px;width:96px;height:96px;border-radius:50%;border:3px solid #17CF54;object-fit:cover;background:#17CF54;color:#111813;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800}
+  .name{font-size:20px;font-weight:700;color:#fff}
+  .handle{font-size:14px;color:#9DB8A6;margin-top:4px}
+  .bio{font-size:14px;color:#9DB8A6;line-height:1.55;margin-top:12px;white-space:pre-wrap}
+  .stats{display:flex;justify-content:center;gap:24px;margin-top:20px}
+  .stat .v{font-size:18px;font-weight:700}
+  .stat .l{font-size:11px;text-transform:uppercase;letter-spacing:.10em;color:#9DB8A6;margin-top:2px}
+  .v.green{color:#17CF54}
+  .divider{height:1px;background:#2A3C30;margin:24px 0}
+  .btn{display:block;width:100%;border:0;background:#17CF54;color:#111813;padding:13px;border-radius:999px;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:10px;cursor:pointer;transition:opacity .2s}
+  .btn:hover{opacity:.85}
+  .stores{display:flex;gap:8px}
+  .store{flex:1;display:block;padding:13px;border-radius:999px;border:1px solid #2A3C30;color:#fff;font-size:14px;font-weight:700;text-decoration:none;transition:opacity .2s}
+  .store:hover{opacity:.85}
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="brand">STOCKBUD</p>
+  <div id="loading"><div class="spinner"></div><p class="title" id="loadTitle">Loading…</p><p class="sub" id="loadSub">Fetching profile</p></div>
+  <div id="content" style="display:none">
+    <div id="avatar" class="avatar">?</div>
+    <h1 class="name" id="name">Profile</h1>
+    <p class="handle" id="handle"></p>
+    <p class="bio" id="bio" style="display:none"></p>
+    <div class="stats">
+      <div class="stat"><div class="v green" id="winRate">—</div><div class="l">Win Rate</div></div>
+      <div class="stat"><div class="v" id="trades">0</div><div class="l">Trades</div></div>
+      <div class="stat"><div class="v" id="followers">0</div><div class="l">Followers</div></div>
+    </div>
+    <div class="divider"></div>
+    <a class="btn" id="primaryBtn" href="#">Follow on StockBud</a>
+    <div class="stores">
+      <a class="store" href="https://apps.apple.com/gb/app/stockbud/id6758548800">App Store</a>
+      <a class="store" href="https://play.google.com/store/apps/details?id=com.stockbud.app">Google Play</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var APP_STORE = "https://apps.apple.com/gb/app/stockbud/id6758548800";
+  var PLAY_STORE = "https://play.google.com/store/apps/details?id=com.stockbud.app";
+  var SUPABASE_URL = "https://poddvsjotivfzwjwfqqn.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvZGR2c2pvdGl2Znp3andmcXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNTU5NDYsImV4cCI6MjA4MzYzMTk0Nn0.-PgNNdmj4uWSyg0xPTVojK8e2nbakVmgTbyXQguV0VM";
+
+  var path = window.location.pathname.replace(/\/+$/, "");
+  var username = decodeURIComponent(path.split("/").pop() || "").trim();
+  var ua = navigator.userAgent;
+  var isIOS = /iPad|iPhone|iPod/.test(ua);
+  var isAndroid = /Android/.test(ua);
+  var isMobile = isIOS || isAndroid;
+  var storeUrl = isIOS ? APP_STORE : (isAndroid ? PLAY_STORE : APP_STORE);
+
+  if (isMobile && username) {
+    document.getElementById("loadTitle").textContent = "Opening " + (isIOS ? "App Store" : "Google Play") + "…";
+    document.getElementById("loadSub").textContent = "Download StockBud to view this profile.";
+    var t = Date.now();
+    window.location.href = "stockbud://profile/" + encodeURIComponent(username);
+    setTimeout(function(){
+      if (document.visibilityState !== "hidden" && Date.now() - t < 3000) {
+        window.location.href = storeUrl;
+      }
+    }, 1500);
+    return;
+  }
+
+  if (!username) {
+    document.getElementById("loadTitle").textContent = "Invalid profile link";
+    document.getElementById("loadSub").textContent = "No username in this URL.";
+    return;
+  }
+
+  function fmtRate(n){ return n == null ? "—" : Math.round(n) + "%"; }
+  function fmtCount(n){
+    if (n == null) return "0";
+    if (n >= 1000000) return (n/1000000).toFixed(1).replace(/\.0$/, "") + "M";
+    if (n >= 1000) return (n/1000).toFixed(1).replace(/\.0$/, "") + "K";
+    return String(n);
+  }
+
+  fetch(SUPABASE_URL + "/rest/v1/users?username=eq." + encodeURIComponent(username) +
+        "&select=username,display_name,bio,avatar_url,win_rate,trades_count,followers_count&limit=1", {
+    headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var p = (data && data[0]) || null;
+    var loading = document.getElementById("loading");
+    var content = document.getElementById("content");
+    if (!p) {
+      loading.querySelector(".spinner").style.display = "none";
+      document.getElementById("loadTitle").textContent = "Profile not found";
+      document.getElementById("loadSub").textContent = "@" + username + " doesn’t exist on StockBud.";
+      document.title = "Profile not found — StockBud";
+      return;
+    }
+    var name = p.display_name || p.username || username;
+    document.getElementById("name").textContent = name;
+    document.getElementById("handle").textContent = "@" + (p.username || username);
+    if (p.bio) {
+      var bio = document.getElementById("bio");
+      bio.textContent = p.bio;
+      bio.style.display = "block";
+    }
+    if (p.avatar_url) {
+      var av = document.getElementById("avatar");
+      av.outerHTML = '<img id="avatar" class="avatar" src="' + p.avatar_url.replace(/"/g, '&quot;') + '" alt="">';
+    } else {
+      document.getElementById("avatar").textContent = (name[0] || "?").toUpperCase();
+    }
+    document.getElementById("winRate").textContent = fmtRate(p.win_rate);
+    document.getElementById("trades").textContent = fmtCount(p.trades_count);
+    document.getElementById("followers").textContent = fmtCount(p.followers_count);
+    document.getElementById("primaryBtn").href = "stockbud://profile/" + encodeURIComponent(username);
+    document.getElementById("primaryBtn").textContent = "Follow " + name + " on StockBud";
+    loading.style.display = "none";
+    content.style.display = "block";
+    document.title = name + " — StockBud";
+  })
+  .catch(function(){
+    document.getElementById("loadTitle").textContent = "Couldn’t load profile";
+    document.getElementById("loadSub").textContent = "Please try again later, or open the app.";
+  });
+})();
+</script>
+</body>
+</html>

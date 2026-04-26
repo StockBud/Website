@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post on StockBud</title>
+<meta name="description" content="View this post on StockBud.">
+<meta property="og:site_name" content="StockBud">
+<meta property="og:title" content="Post on StockBud">
+<meta property="og:description" content="View this post on StockBud.">
+<meta property="og:image" content="https://stock-bud.com/og-default.png">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{background:#111813;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:16px}
+  .card{width:100%;max-width:380px;background:#1C261F;border-radius:18px;padding:32px}
+  .brand{margin-bottom:24px;font-size:11px;font-weight:700;letter-spacing:.18em;color:#17CF54;text-align:center}
+  .spinner{margin:0 auto 16px;width:40px;height:40px;border:2px solid #2A3C30;border-top-color:#17CF54;border-radius:50%;animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .center{text-align:center}
+  .title{font-size:18px;font-weight:700;margin-bottom:6px}
+  .sub{font-size:14px;color:#9DB8A6;margin-bottom:18px}
+  .author{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .avatar{width:40px;height:40px;border-radius:50%;border:2px solid #17CF54;object-fit:cover;background:#17CF54;color:#111813;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px}
+  .name{font-size:14px;font-weight:700;color:#fff}
+  .handle{font-size:12px;color:#9DB8A6}
+  .body{font-size:14px;color:#fff;line-height:1.55;margin-bottom:14px;white-space:pre-wrap;word-wrap:break-word}
+  .image{width:100%;border-radius:12px;max-height:200px;object-fit:cover;margin-bottom:14px}
+  .divider{height:1px;background:#2A3C30;margin:14px 0}
+  .btn{display:block;width:100%;border:0;background:#17CF54;color:#111813;padding:13px;border-radius:999px;font-size:14px;font-weight:700;text-decoration:none;text-align:center;margin-bottom:10px;cursor:pointer;transition:opacity .2s}
+  .btn:hover{opacity:.85}
+  .stores{display:flex;gap:8px}
+  .store{flex:1;display:block;padding:13px;border-radius:999px;border:1px solid #2A3C30;color:#fff;font-size:14px;font-weight:700;text-decoration:none;text-align:center;transition:opacity .2s}
+  .store:hover{opacity:.85}
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="brand">STOCKBUD</p>
+  <div id="loading" class="center"><div class="spinner"></div><p class="title" id="loadTitle">Loading…</p><p class="sub" id="loadSub">Fetching post</p></div>
+  <div id="content" style="display:none">
+    <div class="author"><div id="avatar" class="avatar">?</div><div><p class="name" id="authorName">Someone</p><p class="handle" id="authorHandle"></p></div></div>
+    <p class="body" id="body"></p>
+    <img class="image" id="image" alt="" style="display:none">
+    <div class="divider"></div>
+    <a class="btn" id="primaryBtn" href="#">Open in StockBud</a>
+    <div class="stores">
+      <a class="store" href="https://apps.apple.com/gb/app/stockbud/id6758548800">App Store</a>
+      <a class="store" href="https://play.google.com/store/apps/details?id=com.stockbud.app">Google Play</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var APP_STORE = "https://apps.apple.com/gb/app/stockbud/id6758548800";
+  var PLAY_STORE = "https://play.google.com/store/apps/details?id=com.stockbud.app";
+  var SUPABASE_URL = "https://poddvsjotivfzwjwfqqn.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvZGR2c2pvdGl2Znp3andmcXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwNTU5NDYsImV4cCI6MjA4MzYzMTk0Nn0.-PgNNdmj4uWSyg0xPTVojK8e2nbakVmgTbyXQguV0VM";
+
+  var path = window.location.pathname.replace(/\/+$/, "");
+  var id = decodeURIComponent(path.split("/").pop() || "").trim();
+  var ua = navigator.userAgent;
+  var isIOS = /iPad|iPhone|iPod/.test(ua);
+  var isAndroid = /Android/.test(ua);
+  var isMobile = isIOS || isAndroid;
+  var storeUrl = isIOS ? APP_STORE : (isAndroid ? PLAY_STORE : APP_STORE);
+
+  if (isMobile && id) {
+    document.getElementById("loadTitle").textContent = "Opening " + (isIOS ? "App Store" : "Google Play") + "…";
+    document.getElementById("loadSub").textContent = "Download StockBud to view this post.";
+    var t = Date.now();
+    window.location.href = "stockbud://post/" + encodeURIComponent(id);
+    setTimeout(function(){
+      if (document.visibilityState !== "hidden" && Date.now() - t < 3000) {
+        window.location.href = storeUrl;
+      }
+    }, 1500);
+    return;
+  }
+
+  if (!id) {
+    document.getElementById("loadTitle").textContent = "Invalid post link";
+    document.getElementById("loadSub").textContent = "No post ID in this URL.";
+    return;
+  }
+
+  fetch(SUPABASE_URL + "/rest/v1/posts?id=eq." + encodeURIComponent(id) +
+        "&select=id,body,image_urls,created_at,users:user_id(username,display_name,avatar_url)&limit=1", {
+    headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var post = (data && data[0]) || null;
+    var loading = document.getElementById("loading");
+    var content = document.getElementById("content");
+    if (!post) {
+      loading.querySelector(".spinner").style.display = "none";
+      document.getElementById("loadTitle").textContent = "Post not found";
+      document.getElementById("loadSub").textContent = "This post may have been deleted.";
+      document.title = "Post not found — StockBud";
+      return;
+    }
+    var author = Array.isArray(post.users) ? post.users[0] : post.users;
+    var name = (author && (author.display_name || author.username)) || "Someone";
+    document.getElementById("authorName").textContent = name;
+    document.getElementById("authorHandle").textContent = author && author.username ? "@" + author.username : "";
+    if (author && author.avatar_url) {
+      var av = document.getElementById("avatar");
+      av.outerHTML = '<img id="avatar" class="avatar" src="' + author.avatar_url.replace(/"/g, '&quot;') + '" alt="">';
+    } else {
+      document.getElementById("avatar").textContent = (name[0] || "?").toUpperCase();
+    }
+    if (post.body) document.getElementById("body").textContent = post.body;
+    else document.getElementById("body").style.display = "none";
+    if (post.image_urls && post.image_urls[0]) {
+      var img = document.getElementById("image");
+      img.src = post.image_urls[0];
+      img.style.display = "block";
+    }
+    document.getElementById("primaryBtn").href = "stockbud://post/" + encodeURIComponent(id);
+    loading.style.display = "none";
+    content.style.display = "block";
+    document.title = name + " on StockBud";
+  })
+  .catch(function(){
+    document.getElementById("loadTitle").textContent = "Couldn't load post";
+    document.getElementById("loadSub").textContent = "Please try again later, or open the app.";
+  });
+})();
+</script>
+</body>
+</html>
