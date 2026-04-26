@@ -1,1 +1,14 @@
-{"framework":null,"outputDirectory":".","buildCommand":null,"installCommand":null}
+{
+    "framework": null,
+    "outputDirectory": ".",
+    "buildCommand": null,
+    "installCommand": null,
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "rewrites": [
+          { "source": "/league/:code", "destination": "/league/index.html" },
+          { "source": "/post/:id", "destination": "/post/index.html" },
+          { "source": "/profile/:username", "destination": "/profile/index.html" },
+          { "source": "/room/:id", "destination": "/room/index.html" }
+    ]
+}
