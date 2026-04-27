@@ -256,16 +256,16 @@
       </svg>
     </div>
 
-    <h1>You're in.</h1>
-    <p class="subhead">Your email is confirmed. Open StockBud on your phone to connect your portfolio and join the leaderboard.</p>
+    <h1>Opening StockBud...</h1>
+    <p class="subhead">Your email is confirmed. If the app didn't open automatically, tap the button below.</p>
 
-    <a class="cta" href="https://apps.apple.com/app/id6758548800" rel="noopener">
-      <svg class="cta__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+    <a class="cta" id="open-app-btn" href="stockbud://auth/confirmed" rel="noopener">
+      <svg class="cta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
       </svg>
       <span class="cta__label">
-        <span class="cta__label-top">Download on the</span>
-        <span class="cta__label-bottom">App Store</span>
+        <span class="cta__label-top">Tap to</span>
+        <span class="cta__label-bottom">Open StockBud</span>
       </span>
     </a>
 
@@ -275,5 +275,19 @@
       Need help? <a href="mailto:luke@stock-bud.com">luke@stock-bud.com</a>
     </p>
   </main>
+
+  <script>
+    (function () {
+      var params = window.location.search;
+      var deepLink = "stockbud://auth/confirmed" + params;
+
+      // Update the manual button href with query params
+      var btn = document.getElementById("open-app-btn");
+      if (btn) btn.href = deepLink;
+
+      // Attempt to open the app via deep link
+      window.location.href = deepLink;
+    })();
+  </script>
 </body>
 </html>
