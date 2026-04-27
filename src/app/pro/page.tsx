@@ -19,9 +19,9 @@ const plans = [
   },
   {
     name: "Yearly",
-    price: "£24.99",
+    price: "£19.99",
     period: "/year",
-    description: "Save over 30% compared to monthly.",
+    description: "Save over 40% compared to monthly.",
     href: "https://buy.stripe.com/aFacN53codN4eKEfsS8IU01",
     highlight: true,
   },
