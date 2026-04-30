@@ -10,7 +10,9 @@
     { "source": "/league/:code", "destination": "/league/index.html" },
     { "source": "/post/:id", "destination": "/post/index.html" },
     { "source": "/profile/:username", "destination": "/profile/index.html" },
-    { "source": "/room/:id", "destination": "/room/index.html" }
+    { "source": "/room/:id", "destination": "/room/index.html" },
+    { "source": "/ambsurveys", "destination": "/public/ambssurvey.html" },
+    { "source": "/ambsurvey", "destination": "/public/ambssurvey.html" }
   ]
 }
 
