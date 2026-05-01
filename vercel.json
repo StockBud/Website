@@ -5,6 +5,7 @@
   "installCommand": null,
   "rewrites": [
     { "source": "/auth/confirmed", "destination": "/auth/confirmed/index.html" },
+    { "source": "/auth/reset", "destination": "/auth/reset/index.html" },
     { "source": "/privacy", "destination": "/privacy/index.html" },
     { "source": "/terms", "destination": "/terms/index.html" },
     { "source": "/league/:code", "destination": "/league/index.html" },
@@ -15,4 +16,3 @@
     { "source": "/ambsurvey", "destination": "/public/ambssurvey.html" }
   ]
 }
-

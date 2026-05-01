@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reset Password — StockBud</title>
+<meta name="description" content="Open StockBud to reset your password.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#111813">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{background:#111813;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;display:flex;align-items:center;justify-content:center;padding:16px}
+  .card{width:100%;max-width:380px;background:#1C261F;border-radius:18px;padding:32px;text-align:center}
+  .brand{margin-bottom:24px;font-size:11px;font-weight:700;letter-spacing:.18em;color:#17CF54}
+  .spinner{margin:0 auto 16px;width:40px;height:40px;border:2px solid #2A3C30;border-top-color:#17CF54;border-radius:50%;animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .title{font-size:20px;font-weight:800;margin-bottom:8px}
+  .sub{font-size:14px;color:#9DB8A6;line-height:1.55;margin-bottom:22px}
+  .btn{display:block;width:100%;border:0;background:#17CF54;color:#111813;padding:13px;border-radius:999px;font-size:14px;font-weight:800;text-decoration:none;text-align:center;margin-bottom:10px;cursor:pointer}
+  .store{display:block;width:100%;padding:13px;border-radius:999px;border:1px solid #2A3C30;color:#fff;font-size:14px;font-weight:700;text-decoration:none;text-align:center}
+</style>
+</head>
+<body>
+<main class="card">
+  <p class="brand">STOCKBUD</p>
+  <div class="spinner" id="spinner"></div>
+  <h1 class="title" id="title">Opening StockBud…</h1>
+  <p class="sub" id="sub">Continue in the app to set a new password.</p>
+  <a class="btn" id="openApp" href="#">Open StockBud</a>
+  <a class="store" id="store" href="https://apps.apple.com/gb/app/stockbud/id6758548800">Download StockBud</a>
+</main>
+<script>
+(function(){
+  var APP_STORE = "https://apps.apple.com/gb/app/stockbud/id6758548800";
+  var PLAY_STORE = "https://play.google.com/store/apps/details?id=com.stockbud.app";
+  var ua = navigator.userAgent;
+  var isIOS = /iPad|iPhone|iPod/.test(ua);
+  var isAndroid = /Android/.test(ua);
+  var storeUrl = isAndroid ? PLAY_STORE : APP_STORE;
+  var suffix = window.location.search + window.location.hash;
+  var appUrl = "stockbud://auth/reset" + suffix;
+  var openApp = document.getElementById("openApp");
+  var store = document.getElementById("store");
+  openApp.href = appUrl;
+  store.href = storeUrl;
+
+  if (isIOS || isAndroid) {
+    var started = Date.now();
+    window.location.href = appUrl;
+    setTimeout(function(){
+      if (document.visibilityState !== "hidden" && Date.now() - started < 3000) {
+        document.getElementById("spinner").style.display = "none";
+        document.getElementById("title").textContent = "Open StockBud";
+        document.getElementById("sub").textContent = "If the app did not open, use the button below or download StockBud.";
+      }
+    }, 1500);
+  } else {
+    document.getElementById("spinner").style.display = "none";
+    document.getElementById("title").textContent = "Use your phone to reset";
+    document.getElementById("sub").textContent = "Open this link on the device where StockBud is installed.";
+  }
+})();
+</script>
+</body>
+</html>
