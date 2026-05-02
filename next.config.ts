@@ -1,13 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  redirects: async () => [
-    {
-      source: "/auth",
-      destination: "/auth/confirmed",
-      permanent: false,
-    },
-  ],
   headers: async () => [
     {
       source: "/.well-known/assetlinks.json",

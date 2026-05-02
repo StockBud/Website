@@ -3,6 +3,9 @@
   "outputDirectory": ".",
   "buildCommand": null,
   "installCommand": null,
+  "redirects": [
+    { "source": "/auth", "destination": "/auth/confirmed", "statusCode": 302 }
+  ],
   "rewrites": [
     { "source": "/auth/confirmed", "destination": "/auth/confirmed/index.html" },
     { "source": "/auth/reset", "destination": "/auth/reset/index.html" },
