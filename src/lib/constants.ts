@@ -25,32 +25,32 @@ export const navLinks = [
 
 export const features = [
   {
-    id: "portfolio",
-    title: "Track Your Portfolio",
-    description:
-      "Monitor all your investments in one place with real-time performance analytics, detailed charts, and personalised insights.",
-    icon: "chart" as const,
-  },
-  {
-    id: "social",
-    title: "Join the Conversation",
-    description:
-      "Connect with communities of investors around the stocks and industries you care about. Share ideas, discuss strategies, and learn together.",
-    icon: "users" as const,
-  },
-  {
     id: "leaderboard",
-    title: "Climb the Ranks",
+    title: "Compete on the Leaderboard",
     description:
-      "Compete on leaderboards, create private leagues with friends, and prove your investing knowledge against the community.",
+      "Ranked by real portfolio performance. Public leaderboards or private leagues with friends. Best investor wins.",
     icon: "trophy" as const,
   },
   {
-    id: "prizes",
-    title: "Win Cash Prizes",
+    id: "social",
+    title: "The Social Feed",
     description:
-      "Enter competitions, pick your stocks, and compete for real cash prizes. Put your investing knowledge to the test.",
-    icon: "sparkles" as const,
+      "Follow real investors, see what they're holding, buying, selling. Built for money talk.",
+    icon: "users" as const,
+  },
+  {
+    id: "portfolio",
+    title: "Real Portfolios, Real Numbers",
+    description:
+      "Connect your brokerage. No screenshots, no cherry-picked trades. Verified performance, visible to everyone.",
+    icon: "chart" as const,
+  },
+  {
+    id: "rooms",
+    title: "Private Rooms",
+    description:
+      "Create or join rooms with your investment community. Shared conversation, real competition.",
+    icon: "rooms" as const,
   },
 ];
 

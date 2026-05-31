@@ -17,9 +17,9 @@ const icons = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.023 6.023 0 01-2.77.853m0 0V14.25m0-3.169a6.023 6.023 0 01-2.77-.853" />
     </svg>
   ),
-  sparkles: (
+  rooms: (
     <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
     </svg>
   ),
 };
@@ -27,19 +27,19 @@ const icons = {
 const featureScreenshots: Record<string, { src: string; alt: string }> = {
   chart: {
     src: "/screenshots/profile.png",
-    alt: "StockBud profile showing portfolio, followers, and trading activity",
+    alt: "StockBud profile showing verified portfolio performance and holdings",
   },
   users: {
     src: "/screenshots/discover-feed.png",
-    alt: "StockBud social feed where investors share ideas and discuss stocks",
+    alt: "StockBud social feed where investors share what they're holding and trading",
   },
   trophy: {
     src: "/screenshots/compete-leaderboard.png",
-    alt: "StockBud competition leaderboard showing investor rankings",
+    alt: "StockBud leaderboard ranking investors by real portfolio performance",
   },
-  sparkles: {
-    src: "/screenshots/stock-chooser.png",
-    alt: "StockBud stock search across NASDAQ, NYSE and LSE",
+  rooms: {
+    src: "/screenshots/chat-room.png",
+    alt: "A StockBud private room where an investment community talks and competes",
   },
 };
 
@@ -61,14 +61,14 @@ export function FeatureCard({ title, description, icon, index }: FeatureCardProp
       className="group"
     >
       <div
-        className={`flex flex-col gap-8 md:flex-row md:items-center ${
+        className={`flex flex-col gap-8 rounded-[var(--radius-card)] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#d8a840]/50 hover:shadow-[0_20px_60px_-15px_rgba(216,168,64,0.25)] md:flex-row md:items-center md:p-10 ${
           !isEven ? "md:flex-row-reverse" : ""
         }`}
       >
         {/* Feature screenshot */}
         <div className="flex-1">
           <div className="flex justify-center">
-            <div className="relative h-[420px] w-[200px] overflow-hidden rounded-[2rem] border-2 border-accent shadow-lg md:h-[480px] md:w-[230px]">
+            <div className="relative h-[420px] w-[200px] overflow-hidden rounded-[2rem] border-2 border-accent shadow-lg transition-transform duration-300 group-hover:scale-[1.02] md:h-[480px] md:w-[230px]">
               <Image
                 src={screenshot.src}
                 alt={screenshot.alt}

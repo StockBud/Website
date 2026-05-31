@@ -9,11 +9,11 @@ export function FeaturesSection() {
       <AnimatedElement>
         <div className="text-center">
           <h2 className="text-3xl font-bold md:text-4xl lg:text-5xl">
-            Everything you need to invest smarter
+            Everything the UK investing scene has been missing.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-foreground-muted md:text-lg">
-            StockBud combines portfolio tracking, social features, and AI-powered
-            insights into one powerful app.
+            Leaderboards, a real social feed, verified portfolios, and private
+            rooms — built for investors, not traders.
           </p>
         </div>
       </AnimatedElement>
