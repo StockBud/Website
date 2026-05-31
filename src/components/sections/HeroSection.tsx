@@ -41,6 +41,26 @@ export function HeroSection() {
           <motion.div variants={fadeInUp} transition={defaultTransition}>
             <AppStoreButtons className="mt-10" />
           </motion.div>
+
+          {/* Stats pill bar */}
+          <motion.div
+            variants={fadeInUp}
+            transition={defaultTransition}
+            className="mt-10 flex flex-wrap gap-3"
+          >
+            {[
+              "Live on iOS & Android",
+              "118 Monthly Active Users",
+              "UK-First Social Investing",
+            ].map((stat) => (
+              <span
+                key={stat}
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-foreground-muted backdrop-blur-md"
+              >
+                {stat}
+              </span>
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Phone mockup */}
