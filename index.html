@@ -224,6 +224,24 @@
     .proof-pill b { color: var(--gold); font-weight: 800; margin-right: 8px; }
     .proof-pill span { color: var(--grey); font-size: 0.9rem; }
 
+    /* POSITIONING */
+    .positioning { padding: 90px 48px; max-width: 1100px; margin: 0 auto; }
+    .positioning .pos-head { text-align: center; max-width: 760px; margin: 0 auto 48px; }
+    .positioning .pos-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.1; }
+    .positioning .pos-head .pos-sub { font-size: clamp(1.3rem, 2.5vw, 1.9rem); font-weight: 700; color: var(--green-light); margin-top: 10px; }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
+    .compare-card { border-radius: 24px; padding: 40px; backdrop-filter: blur(12px); }
+    .compare-card.broker { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); }
+    .compare-card.sb { background: rgba(216,168,64,0.06); border: 1px solid rgba(216,168,64,0.45); box-shadow: 0 20px 60px -20px rgba(216,168,64,0.3); }
+    .compare-card .clabel { font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; }
+    .compare-card.broker .clabel { color: var(--grey); }
+    .compare-card.sb .clabel { color: var(--gold); }
+    .compare-card ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .compare-card li { display: flex; align-items: center; gap: 12px; font-size: 1.02rem; }
+    .compare-card.broker li { color: var(--grey); }
+    .compare-card.sb li { color: var(--white); font-weight: 500; }
+    .compare-card .ic { width: 20px; height: 20px; flex-shrink: 0; }
+
     /* HOW IT WORKS */
     .how-it-works {
       padding: 80px 48px;
@@ -446,6 +464,35 @@
     <div class="proof-pill"><b>118</b><span>Monthly Active Users</span></div>
     <div class="proof-pill"><b>200K+</b><span>Creator Reach</span></div>
     <div class="proof-pill"><b>iOS &amp; Android</b><span>Live Now</span></div>
+  </div>
+</section>
+
+<section class="positioning reveal" id="positioning">
+  <div class="pos-head">
+    <h2>Every other platform is built for the trade.</h2>
+    <div class="pos-sub">StockBud is built for the investor.</div>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-card broker reveal-left">
+      <div class="clabel">What brokerages give you</div>
+      <ul>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14"/></svg>Execution</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14"/></svg>Charts</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14"/></svg>Order History</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14"/></svg>Trade Confirmation</li>
+      </ul>
+    </div>
+    <div class="compare-card sb reveal-right">
+      <div class="clabel">What StockBud gives you</div>
+      <ul>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Leaderboards</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Social Feed</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Verified Portfolios</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Private Leagues</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Prize Tournaments</li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Community</li>
+      </ul>
+    </div>
   </div>
 </section>
 
