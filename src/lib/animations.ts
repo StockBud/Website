@@ -1,7 +1,7 @@
 import type { Variants, Transition } from "framer-motion";
 
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
 };
 

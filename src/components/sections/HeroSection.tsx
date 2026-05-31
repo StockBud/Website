@@ -1,26 +1,42 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { AppStoreButtons } from "@/components/ui/AppStoreButtons";
 import { GradientOverlay } from "@/components/ui/GradientOverlay";
 import { siteConfig } from "@/lib/constants";
 import { fadeInUp, defaultTransition } from "@/lib/animations";
 
 export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 160]);
+
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-screen items-center overflow-hidden"
+    >
       <GradientOverlay variant="hero" />
 
-      {/* Animated, slowly pulsing green gradient backdrop */}
-      <div
-        className="animate-gradient-pulse pointer-events-none absolute inset-0 -z-10 will-change-transform"
+      {/* Animated, slowly pulsing green gradient backdrop with scroll parallax */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{ y: bgY }}
         aria-hidden
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 60% at 70% 30%, rgba(111,175,106,0.18) 0%, transparent 65%), radial-gradient(ellipse 60% 50% at 20% 80%, rgba(216,168,64,0.08) 0%, transparent 70%)",
-        }}
-      />
+      >
+        <div
+          className="animate-gradient-pulse absolute inset-0 will-change-transform"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 60% at 70% 30%, rgba(111,175,106,0.18) 0%, transparent 65%), radial-gradient(ellipse 60% 50% at 20% 80%, rgba(216,168,64,0.08) 0%, transparent 70%)",
+          }}
+        />
+      </motion.div>
 
       <div className="mx-auto grid w-full max-w-[1280px] items-center gap-12 px-6 pt-20 md:px-8 lg:grid-cols-2 lg:px-12">
         {/* Text content */}
