@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { clsx } from "clsx";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { Button } from "@/components/ui/Button";
@@ -22,8 +23,18 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-6 md:h-20 md:px-8 lg:px-12">
         {/* Logo */}
-        <a href="#" className="text-xl font-bold text-foreground">
-          {siteConfig.name}
+        <a href="#" className="flex items-center gap-2.5" aria-label="StockBud home">
+          <Image
+            src="/stockbud-logo.png"
+            alt="StockBud logo"
+            width={36}
+            height={36}
+            className="h-8 w-8 md:h-9 md:w-9"
+            priority
+          />
+          <span className="text-xl font-bold text-foreground">
+            {siteConfig.name}
+          </span>
         </a>
 
         {/* Desktop nav links */}

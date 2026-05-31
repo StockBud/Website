@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { siteConfig, footerLinks } from "@/lib/constants";
 
 function SocialIcon({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
@@ -21,8 +22,17 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <a href="#" className="text-xl font-bold text-foreground">
-              {siteConfig.name}
+            <a href="#" className="flex items-center gap-2.5" aria-label="StockBud home">
+              <Image
+                src="/stockbud-logo.png"
+                alt="StockBud logo"
+                width={36}
+                height={36}
+                className="h-9 w-9"
+              />
+              <span className="text-xl font-bold text-foreground">
+                {siteConfig.name}
+              </span>
             </a>
             <p className="mt-4 max-w-xs text-sm text-foreground-muted">
               Making investing accessible, social, and fun for everyone.
