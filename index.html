@@ -230,21 +230,6 @@
     .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
     .step p { color: var(--grey); font-size: 0.87rem; line-height: 1.6; }
 
-    /* UOM */
-    .uom-section { padding: 80px 48px; max-width: 1200px; margin: 0 auto; }
-    .uom-card {
-      background: linear-gradient(135deg, rgba(216,168,64,0.07) 0%, rgba(111,175,106,0.07) 100%);
-      border: 1px solid rgba(216,168,64,0.2); border-radius: 24px;
-      padding: 64px 48px; text-align: center; position: relative; overflow: hidden;
-    }
-    .uom-card::before {
-      content: ""; position: absolute; top: -80px; right: -80px;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(216,168,64,0.07) 0%, transparent 70%);
-    }
-    .uom-card h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 900; margin-bottom: 16px; letter-spacing: -0.5px; }
-    .uom-card p { color: var(--grey); font-size: 1rem; max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
-
     /* FOOTER */
     footer { background: var(--green-deep); border-top: 1px solid rgba(111,175,106,0.1); padding: 56px 48px 32px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; }
@@ -290,8 +275,6 @@
       .how-it-works { padding: 60px 20px; }
       .steps { grid-template-columns: 1fr; }
       .steps::before { display: none; }
-      .uom-section { padding: 60px 20px; }
-      .uom-card { padding: 40px 20px; }
       footer { padding: 48px 20px 24px; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
@@ -450,18 +433,6 @@
         <p>Join leagues, climb leaderboards, and enter prize pot tournaments.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="uom-section" id="uom">
-  <div class="uom-card">
-    <div class="uom-tag" style="display:inline-flex;align-items:center;gap:6px;background:rgba(216,168,64,0.12);border:1px solid rgba(216,168,64,0.25);color:#d8a840;font-size:0.8rem;font-weight:600;padding:5px 14px;border-radius:50px;margin-bottom:20px;">&#127891; UoM Students</div>
-    <h2>UoM Competition — Open Now</h2>
-    <p>Sign up with your student email and head to the Compete tab to enter. Track your real portfolio performance against other UoM students and see where you rank.</p>
-    <a href="https://apps.apple.com/gb/app/stockbud/id6758548800" onclick="window.accelerateTracker&&window.accelerateTracker.track('app_download',{platform:'ios'})" class="btn-primary" target="_blank" style="display:inline-flex;margin-top:8px;">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download Free on iOS
-    </a>
   </div>
 </section>
 
