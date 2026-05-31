@@ -223,18 +223,24 @@
     .positioning .pos-head { text-align: center; max-width: 760px; margin: 0 auto 48px; }
     .positioning .pos-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.1; }
     .positioning .pos-head .pos-sub { font-size: clamp(1.3rem, 2.5vw, 1.9rem); font-weight: 700; color: var(--green-light); margin-top: 10px; }
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
-    .compare-card { border-radius: 24px; padding: 40px; backdrop-filter: blur(12px); }
-    .compare-card.broker { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); }
-    .compare-card.sb { background: rgba(216,168,64,0.06); border: 1px solid rgba(216,168,64,0.45); box-shadow: 0 20px 60px -20px rgba(216,168,64,0.3); }
-    .compare-card .clabel { font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; }
-    .compare-card.broker .clabel { color: var(--grey); }
-    .compare-card.sb .clabel { color: var(--gold); }
-    .compare-card ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-    .compare-card li { display: flex; align-items: center; gap: 12px; font-size: 1.02rem; }
-    .compare-card.broker li { color: var(--grey); }
-    .compare-card.sb li { color: var(--white); font-weight: 500; }
-    .compare-card .ic { width: 20px; height: 20px; flex-shrink: 0; }
+    .compare-matrix { max-width: 720px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.08); border-radius: 22px; overflow: hidden; backdrop-filter: blur(12px); background: rgba(255,255,255,0.02); }
+    .cmp-row { display: grid; grid-template-columns: 1fr 110px 110px; align-items: center; padding: 13px 26px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .cmp-row:first-child { border-top: none; }
+    .cmp-head { background: rgba(255,255,255,0.03); padding: 18px 26px; }
+    .cmp-head .ch-feature { color: var(--grey); font-size: 0.74rem; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; }
+    .cmp-head .ch-col { text-align: center; font-size: 0.82rem; font-weight: 700; }
+    .ch-broker { color: var(--grey); }
+    .ch-sb { color: var(--gold); }
+    .cmp-feature { color: var(--white); font-size: 0.98rem; font-weight: 500; }
+    .cmp-cell { display: flex; justify-content: center; }
+    .cmp-cell svg { width: 21px; height: 21px; }
+    .cmp-row.sb-col-tint { } /* placeholder */
+    .yes-broker { color: var(--green-light); }
+    .yes-sb { color: var(--gold); }
+    .no-mark { color: rgba(255,255,255,0.16); }
+    .cmp-note { max-width: 720px; margin: 30px auto 0; text-align: center; color: var(--grey); font-size: 0.95rem; line-height: 1.75; }
+    .cmp-note strong { color: var(--white); font-weight: 600; }
+    .cmp-note .t212 { color: var(--green-light); font-weight: 600; }
 
     /* HOW IT WORKS */
     .how-it-works {
@@ -350,8 +356,13 @@
       .quote-card { padding: 44px 24px 32px; margin-top: 44px; }
       .quote-card .quote-mark { font-size: 4.5rem; left: 18px; }
       .positioning { padding: 60px 20px; }
-      .compare-grid { grid-template-columns: 1fr; }
-      .compare-card { padding: 32px 24px; }
+      .cmp-row { grid-template-columns: 1fr 64px 64px; padding: 12px 16px; }
+      .cmp-head { padding: 14px 16px; }
+      .cmp-feature { font-size: 0.9rem; }
+      .cmp-head .ch-feature { font-size: 0.68rem; }
+      .cmp-head .ch-col { font-size: 0.7rem; }
+      .cmp-cell svg { width: 19px; height: 19px; }
+      .cmp-note { font-size: 0.9rem; }
       .qr-store-btns { justify-content: center; }
       footer { padding: 48px 20px 24px; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -510,28 +521,66 @@
     <h2>Every other platform is built for the trade.</h2>
     <div class="pos-sub">StockBud is built for the investor.</div>
   </div>
-  <div class="compare-grid">
-    <div class="compare-card broker reveal-left">
-      <div class="clabel">What brokerages give you</div>
-      <ul>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14"/></svg>Execution</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14"/></svg>Charts</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14"/></svg>Order History</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M5 12h14"/></svg>Trade Confirmation</li>
-      </ul>
+  <div class="compare-matrix reveal">
+    <div class="cmp-row cmp-head">
+      <div class="ch-feature">Feature</div>
+      <div class="ch-col ch-broker">Your Brokerage</div>
+      <div class="ch-col ch-sb">StockBud</div>
     </div>
-    <div class="compare-card sb reveal-right">
-      <div class="clabel">What StockBud gives you</div>
-      <ul>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Leaderboards</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Social Feed</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Verified Portfolios</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Private Leagues</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Prize Tournaments</li>
-        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#d8a840" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Community</li>
-      </ul>
+    <div class="cmp-row">
+      <div class="cmp-feature">Trade execution</div>
+      <div class="cmp-cell"><svg class="yes-broker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+      <div class="cmp-cell"><svg class="no-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Live charts</div>
+      <div class="cmp-cell"><svg class="yes-broker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Order history</div>
+      <div class="cmp-cell"><svg class="yes-broker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Trade confirmation</div>
+      <div class="cmp-cell"><svg class="yes-broker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Verified portfolios</div>
+      <div class="cmp-cell"><svg class="no-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Leaderboards</div>
+      <div class="cmp-cell"><svg class="no-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Social feed</div>
+      <div class="cmp-cell"><svg class="no-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Private leagues</div>
+      <div class="cmp-cell"><svg class="no-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Prize tournaments</div>
+      <div class="cmp-cell"><svg class="no-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-feature">Community</div>
+      <div class="cmp-cell"><svg class="no-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></div>
+      <div class="cmp-cell"><svg class="yes-sb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg></div>
     </div>
   </div>
+  <p class="cmp-note">
+    <strong>StockBud isn&rsquo;t a broker &mdash; we don&rsquo;t execute trades.</strong> We securely connect to your existing brokerage to pull your real holdings, then turn them into live charts, order history, verified performance, and a social competition. <span class="t212">Trading&nbsp;212 integration is live in our current beta</span>, with more brokerages on the way.
+  </p>
 </section>
 
 <section class="how-it-works" id="how-it-works">
