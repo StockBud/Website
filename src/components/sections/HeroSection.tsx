@@ -12,6 +12,16 @@ export function HeroSection() {
     <section className="relative flex min-h-screen items-center overflow-hidden">
       <GradientOverlay variant="hero" />
 
+      {/* Animated, slowly pulsing green gradient backdrop */}
+      <div
+        className="animate-gradient-pulse pointer-events-none absolute inset-0 -z-10 will-change-transform"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 70% 30%, rgba(111,175,106,0.18) 0%, transparent 65%), radial-gradient(ellipse 60% 50% at 20% 80%, rgba(216,168,64,0.08) 0%, transparent 70%)",
+        }}
+      />
+
       <div className="mx-auto grid w-full max-w-[1280px] items-center gap-12 px-6 pt-20 md:px-8 lg:grid-cols-2 lg:px-12">
         {/* Text content */}
         <motion.div
@@ -24,13 +34,29 @@ export function HeroSection() {
             },
           }}
         >
-          <motion.h1
-            variants={fadeInUp}
-            transition={defaultTransition}
-            className="text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl lg:text-[4.5rem] lg:tracking-[-0.03em]"
-          >
-            {siteConfig.tagline}
-          </motion.h1>
+          <h1 className="text-5xl font-bold leading-[1.02] tracking-tight md:text-6xl lg:text-[4.75rem] lg:tracking-[-0.03em]">
+            <motion.span
+              variants={fadeInUp}
+              transition={defaultTransition}
+              className="block text-foreground"
+            >
+              Connect,
+            </motion.span>
+            <motion.span
+              variants={fadeInUp}
+              transition={defaultTransition}
+              className="block text-[#d8a840]"
+            >
+              Compare,
+            </motion.span>
+            <motion.span
+              variants={fadeInUp}
+              transition={defaultTransition}
+              className="block text-[#6faf6a]"
+            >
+              Compete.
+            </motion.span>
+          </h1>
           <motion.p
             variants={fadeInUp}
             transition={defaultTransition}
@@ -70,13 +96,13 @@ export function HeroSection() {
           transition={{ ...defaultTransition, delay: 0.5, duration: 0.8 }}
           className="flex justify-center lg:justify-end"
         >
-          <div className="animate-float relative">
-            {/* Glow behind phone */}
+          <div className="animate-float relative will-change-transform">
+            {/* Breathing glow behind phone */}
             <div
-              className="absolute inset-0 -z-10 scale-125 blur-3xl"
+              className="animate-glow-pulse absolute inset-0 -z-10 blur-3xl will-change-transform"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(76,175,80,0.2) 0%, transparent 70%)",
+                  "radial-gradient(circle, rgba(111,175,106,0.35) 0%, rgba(216,168,64,0.12) 45%, transparent 72%)",
               }}
             />
             <div className="relative h-[500px] w-[260px] overflow-hidden rounded-[3rem] border-2 border-accent shadow-2xl md:h-[580px] md:w-[290px]">
