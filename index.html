@@ -58,6 +58,16 @@
     .hero-inner {
       max-width: 1200px; margin: 0 auto; width: 100%;
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    /* Faded brand mark watermarked into the right side of the hero */
+    .hero-watermark {
+      position: absolute; top: 50%; right: -120px; transform: translateY(-50%);
+      width: 680px; height: 680px; z-index: 0; pointer-events: none;
+      background: url('/assets/stockbud-mark.png') center / contain no-repeat;
+      opacity: 0.07;
+      -webkit-mask-image: radial-gradient(circle, #000 55%, transparent 78%);
+      mask-image: radial-gradient(circle, #000 55%, transparent 78%);
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
@@ -329,6 +339,7 @@
       .nav-links { display: none; }
       .hero { padding: 100px 20px 60px; }
       .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-watermark { width: 380px; height: 380px; right: -140px; opacity: 0.05; }
       .phone-wrap-back { display: none; }
       .hero-visual { height: 500px; }
       .phone-wrap { width: 240px; height: 510px; translate: -50% 0; left: 50%; }
@@ -374,6 +385,7 @@
 </nav>
 
 <section class="hero" id="home">
+  <div class="hero-watermark" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-badge">Live on iOS &amp; Android &middot; UK-First Social Investing</div>
