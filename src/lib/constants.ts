@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "StockBud",
-  tagline: "Investing Made Social",
+  tagline: "Connect, Compare, Compete.",
   description:
-    "Track your portfolio, compete with friends, and learn from a community of investors. StockBud makes investing accessible, social, and fun.",
+    "The social layer the UK investing scene has never had. Connect your real portfolio, compete on leaderboards, and follow investors who actually put their money where their mouth is.",
   url: "https://stock-bud.com",
   email: {
     support: "support@stock-bud.com",
@@ -74,11 +74,11 @@ export const steps = [
   },
 ];
 
+// Real, verifiable stats only — no fabricated numbers.
 export const stats = [
-  { value: 10000, suffix: "+", label: "Active Users" },
-  { value: 500, suffix: "K+", label: "Portfolios Tracked" },
-  { value: 4.8, suffix: "", label: "App Store Rating", decimals: 1 },
-  { value: 50, suffix: "K+", label: "Community Posts" },
+  { value: "118", label: "Monthly Active Users" },
+  { value: "200K+", label: "Combined Creator Reach" },
+  { value: "iOS & Android", label: "Live Now" },
 ];
 
 export const footerLinks = {
