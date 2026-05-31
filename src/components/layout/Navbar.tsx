@@ -17,7 +17,7 @@ export function Navbar() {
       className={clsx(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
+          ? "bg-[#003021]/85 backdrop-blur-xl border-b border-white/10"
           : "bg-transparent"
       )}
     >
@@ -52,7 +52,12 @@ export function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex">
-          <Button as="a" href="#download" size="compact">
+          <Button
+            as="a"
+            href="#download"
+            size="compact"
+            className="bg-[#d8a840] font-semibold text-[#003021] hover:bg-[#e0b659] hover:scale-105"
+          >
             Download
           </Button>
         </div>
@@ -109,6 +114,7 @@ export function Navbar() {
             as="a"
             href="#download"
             onClick={() => setMobileMenuOpen(false)}
+            className="bg-[#d8a840] font-semibold text-[#003021] hover:bg-[#e0b659]"
           >
             Download
           </Button>
