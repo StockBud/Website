@@ -57,20 +57,21 @@ export const features = [
 export const steps = [
   {
     number: 1,
-    title: "Download",
-    description: "Get StockBud free from the App Store or Google Play.",
+    title: "Connect",
+    description:
+      "Download StockBud and link your real brokerage account in seconds.",
   },
   {
     number: 2,
-    title: "Track & Learn",
+    title: "Compare",
     description:
-      "Add your investments, follow stocks, and track your portfolio.",
+      "See how your portfolio stacks up against friends, creators, and the wider community.",
   },
   {
     number: 3,
-    title: "Compete & Grow",
+    title: "Compete",
     description:
-      "Join leagues, climb leaderboards, and grow your investing skills.",
+      "Join leagues, climb leaderboards, and enter prize pot tournaments.",
   },
 ];
 
