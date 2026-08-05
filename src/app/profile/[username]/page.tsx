@@ -51,7 +51,7 @@ export async function generateMetadata({
       siteName: "StockBud",
       title: `${name} — StockBud`,
       description: profile.bio || `View ${name}'s trading profile on StockBud.`,
-      images: [profile.avatar_url || "https://stock-bud.com/og-default.png"],
+      images: [profile.avatar_url || "https://stock-bud.com/assets/og-image.png"],
     },
   };
 }

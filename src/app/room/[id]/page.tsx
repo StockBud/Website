@@ -46,7 +46,7 @@ export async function generateMetadata({
       siteName: "StockBud",
       title: `Join ${room.name} — StockBud`,
       description: `You've been invited to join the ${room.name} trading room on StockBud.`,
-      images: ["https://stock-bud.com/og-default.png"],
+      images: ["https://stock-bud.com/assets/og-image.png"],
     },
   };
 }

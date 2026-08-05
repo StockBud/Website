@@ -51,7 +51,7 @@ export async function generateMetadata({
   if (!post) return { title: "Post not found — StockBud" };
   const name = post.author?.display_name || post.author?.username || "StockBud";
   const description = post.body ? post.body.slice(0, 200) : `View this post on StockBud.`;
-  const image = post.image_urls?.[0] || "https://stock-bud.com/og-default.png";
+  const image = post.image_urls?.[0] || "https://stock-bud.com/assets/og-image.png";
   return {
     title: `${name} on StockBud`,
     description,
