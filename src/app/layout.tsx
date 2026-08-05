@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       "Track your portfolio, compete with friends, and learn from a community of investors.",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/assets/og-image.png",
         width: 1200,
         height: 630,
         alt: "StockBud - Investing Made Social",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "StockBud - Investing Made Social",
     description:
       "Track your portfolio, compete with friends, and learn from a community of investors.",
-    images: ["/images/og-image.png"],
+    images: ["/assets/og-image.png"],
   },
   robots: {
     index: true,
