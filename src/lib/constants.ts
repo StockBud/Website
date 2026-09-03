@@ -59,7 +59,7 @@ export const steps = [
     number: 1,
     title: "Connect",
     description:
-      "Download StockBud and link your real brokerage account in seconds.",
+      "Join transparent investing communities — see what people hold, how they're performing, and why.",
   },
   {
     number: 2,
