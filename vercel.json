@@ -3,6 +3,14 @@
   "outputDirectory": ".",
   "buildCommand": null,
   "installCommand": null,
+  "headers": [
+    {
+      "source": "/.well-known/apple-app-site-association",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ]
+    }
+  ],
   "redirects": [
     { "source": "/auth", "destination": "/auth/confirmed", "statusCode": 302 }
   ],

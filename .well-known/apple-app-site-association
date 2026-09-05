@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "F993CX5672.com.vlad.stockbud",
+        "paths": [
+          "/profile/*",
+          "/post/*",
+          "/league/*",
+          "/room/*",
+          "/auth/*"
+        ]
+      }
+    ]
+  }
+}
