@@ -3,6 +3,9 @@
   "target": {
     "namespace": "android_app",
     "package_name": "com.stockbud.app",
-    "sha256_cert_fingerprints": ["73:3B:B6:B3:7F:16:27:2B:6F:78:01:65:4F:A9:C5:F8:13:83:A0:D7:D4:6F:41:1C:68:5E:E4:78:06:D0:39:25"]
+    "sha256_cert_fingerprints": [
+      "73:3B:B6:B3:7F:16:27:2B:6F:78:01:65:4F:A9:C5:F8:13:83:A0:D7:D4:6F:41:1C:68:5E:E4:78:06:D0:39:25",
+      "43:04:44:D0:17:89:C8:0E:B8:71:47:50:FB:AB:58:3D:05:5C:F9:4A:81:F3:00:8E:E2:29:D8:0A:8E:D6:D3:C7"
+    ]
   }
 }]
