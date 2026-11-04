@@ -8,16 +8,16 @@ const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.stockbud.app";
 
 function TypeBadge({ type }: { type: string | null }) {
-  const label = type === "real_money" ? "Real Money" : "Demo";
+  const label = type === "real" ? "Real Money" : "Demo";
   return (
     <span
       className="inline-block rounded-full px-3 py-1 text-xs font-semibold"
       style={{
         background:
-          type === "real_money"
+          type === "real"
             ? "rgba(23,207,84,0.15)"
             : "rgba(157,184,166,0.15)",
-        color: type === "real_money" ? "#17CF54" : "#9DB8A6",
+        color: type === "real" ? "#17CF54" : "#9DB8A6",
       }}
     >
       {label}

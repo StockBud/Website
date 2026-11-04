@@ -101,11 +101,16 @@
   }
 
   // Desktop: fetch league info from Supabase
-  fetch(SUPABASE_URL + "/rest/v1/leagues?invite_code=eq." + encodeURIComponent(code) +
-        "&select=id,name,invite_code,league_type,status&limit=1", {
-    headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
+  fetch(SUPABASE_URL + "/rest/v1/rpc/get_league_by_invite_code", {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: "Bearer " + SUPABASE_ANON_KEY,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ p_code: code })
   })
-  .then(function(r){ return r.json(); })
+  .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
   .then(function(data){
     var league = (data && data[0]) || null;
     document.getElementById("spinner").style.display = "none";
@@ -118,10 +123,10 @@
     }
     document.getElementById("title").textContent = league.name;
     document.getElementById("sub").style.display = "none";
-    var t = league.league_type === "real_money" ? "Real Money" : "Demo";
+    var t = league.league_type === "real" ? "Real Money" : "Demo";
     var s = league.status === "active" ? "Active" : "Pending";
     var tb = document.getElementById("typeBadge"); tb.textContent = t;
-    tb.className = "badge " + (league.league_type === "real_money" ? "b-real" : "b-demo");
+    tb.className = "badge " + (league.league_type === "real" ? "b-real" : "b-demo");
     var sb = document.getElementById("statusBadge"); sb.textContent = s;
     sb.className = "badge " + (league.status === "active" ? "b-active" : "b-pending");
     document.getElementById("inviteCode").textContent = league.invite_code;

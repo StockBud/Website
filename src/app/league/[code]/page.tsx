@@ -16,15 +16,19 @@ export type League = {
 async function fetchLeague(code: string): Promise<League | null> {
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/leagues?invite_code=eq.${encodeURIComponent(code)}&select=id,name,invite_code,league_type,status&limit=1`,
+      `${SUPABASE_URL}/rest/v1/rpc/get_league_by_invite_code`,
       {
+        method: "POST",
         headers: {
           apikey: SUPABASE_ANON_KEY,
           Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({ p_code: code }),
         next: { revalidate: 60 },
       }
     );
+    if (!res.ok) return null;
     const data = await res.json();
     return data[0] ?? null;
   } catch {
