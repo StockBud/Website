@@ -123,10 +123,10 @@
     }
     document.getElementById("title").textContent = league.name;
     document.getElementById("sub").style.display = "none";
-    var t = league.league_type === "real_money" ? "Real Money" : "Demo";
+    var t = league.league_type === "real" ? "Real Money" : "Demo";
     var s = league.status === "active" ? "Active" : "Pending";
     var tb = document.getElementById("typeBadge"); tb.textContent = t;
-    tb.className = "badge " + (league.league_type === "real_money" ? "b-real" : "b-demo");
+    tb.className = "badge " + (league.league_type === "real" ? "b-real" : "b-demo");
     var sb = document.getElementById("statusBadge"); sb.textContent = s;
     sb.className = "badge " + (league.status === "active" ? "b-active" : "b-pending");
     document.getElementById("inviteCode").textContent = league.invite_code;
