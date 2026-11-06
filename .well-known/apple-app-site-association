@@ -9,7 +9,8 @@
           "/post/*",
           "/league/*",
           "/room/*",
-          "/auth/*"
+          "/auth/*",
+          "/c/*"
         ]
       }
     ]
