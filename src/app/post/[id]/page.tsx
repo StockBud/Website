@@ -8,7 +8,6 @@ const SUPABASE_ANON_KEY =
 export type Post = {
   id: string;
   body: string | null;
-  image_urls: string[] | null;
   created_at: string;
   author: {
     username: string;
@@ -20,7 +19,12 @@ export type Post = {
 async function fetchPost(id: string): Promise<Post | null> {
   try {
     const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/posts?id=eq.${encodeURIComponent(id)}&select=id,body,image_urls,created_at,users:user_id(username,display_name,avatar_url)&limit=1`,
+      // TODO(#598): add an embed of post_images(image_url) to restore the post
+      // image and a per-post og:image. That needs SELECT on post_images for
+      // anon, which it does not have today. Selecting posts.image_urls — a
+      // column that does not exist — made PostgREST 400 and broke every
+      // shared post link.
+      `${SUPABASE_URL}/rest/v1/posts?id=eq.${encodeURIComponent(id)}&select=id,body,created_at,users:user_id(username,display_name,avatar_url)&limit=1`,
       {
         headers: {
           apikey: SUPABASE_ANON_KEY,
@@ -51,7 +55,7 @@ export async function generateMetadata({
   if (!post) return { title: "Post not found — StockBud" };
   const name = post.author?.display_name || post.author?.username || "StockBud";
   const description = post.body ? post.body.slice(0, 200) : `View this post on StockBud.`;
-  const image = post.image_urls?.[0] || "https://stock-bud.com/assets/og-image.png";
+  const image = "https://stock-bud.com/assets/og-image.png";
   return {
     title: `${name} on StockBud`,
     description,
