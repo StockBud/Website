@@ -90,7 +90,7 @@
   }
 
   fetch(SUPABASE_URL + "/rest/v1/posts?id=eq." + encodeURIComponent(id) +
-        "&select=id,body,image_urls,created_at,users:user_id(username,display_name,avatar_url)&limit=1", {
+        "&select=id,body,created_at,users:user_id(username,display_name,avatar_url)&limit=1", {
     headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
   })
   .then(function(r){ return r.json(); })
@@ -117,11 +117,10 @@
     }
     if (post.body) document.getElementById("body").textContent = post.body;
     else document.getElementById("body").style.display = "none";
-    if (post.image_urls && post.image_urls[0]) {
-      var img = document.getElementById("image");
-      img.src = post.image_urls[0];
-      img.style.display = "block";
-    }
+    // TODO(#598): post images need an embed of post_images(image_url), which
+    // needs SELECT on post_images for anon. Until that grant is applied the
+    // image stays hidden — selecting the non-existent posts.image_urls made
+    // PostgREST 400 and broke the whole page.
     document.getElementById("primaryBtn").href = "stockbud://post/" + encodeURIComponent(id);
     loading.style.display = "none";
     content.style.display = "block";

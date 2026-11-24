@@ -133,15 +133,9 @@ export function PostClient({ id, post }: { id: string; post: Post | null }) {
               </p>
             )}
 
-            {/* Image thumbnail */}
-            {post.image_urls?.[0] && (
-              <img
-                src={post.image_urls[0]}
-                alt="Post image"
-                className="mb-4 w-full rounded-xl object-cover"
-                style={{ maxHeight: 200 }}
-              />
-            )}
+            {/* Image thumbnail: see TODO(#598) in page.tsx — restoring it
+                needs an embed of post_images(image_url) and SELECT on
+                post_images for anon. */}
 
             <div className="my-4 h-px" style={{ background: "#2A3C30" }} />
 
